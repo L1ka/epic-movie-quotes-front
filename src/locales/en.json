@@ -1,25 +1,37 @@
 {
-    "landing": {
-      "title": "Find any quote in millions of movie lines",
-      "movie_quotes": "Movie quotes",
-      "en": "Eng",
-      "ge": "Geo",
-      "sign_up": "Sign Up",
-      "log_in": "Log in"
-    },
-    "registration": {
-      "create_an_account": "Create an account",
-      "start_your_journey": "Start your journey!",
-      "name": "Name",
-      "enter_your_name": "Enter your name",
-      "enter_your_email": "Enter your email",
-      "email": "Email",
-      "password": "Password",
-      "confirm_password": "Confirm password",
-      "get_started": "Get started",
-      "sign_up_with_google": "Sign up with Google",
-      "already_have_an_account": "Already have an account?",
-      "log_in": "Log in"
-    }
+  "landing": {
+    "title": "Find any quote in millions of movie lines",
+    "movie_quotes": "Movie quotes",
+    "en": "Eng",
+    "ge": "Geo",
+    "sign_up": "Sign Up",
+    "log_in": "Log in"
+  },
+  "registration": {
+    "create_an_account": "Create an account",
+    "start_your_journey": "Start your journey!",
+    "name": "Name",
+    "enter_your_name": "Enter your name",
+    "enter_your_email": "Enter your email",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm password",
+    "get_started": "Get started",
+    "sign_up_with_google": "Sign up with Google",
+    "already_have_an_account": "Already have an account?",
+    "log_in": "Log in"
+  },
+  "login": {
+    "log_in_to_your_account": "Log in to your account",
+    "welcome_back": "Welcome back! Please enter your details.",
+    "email": "Email",
+    "password": "Password",
+    "enter_your_email": "Enter your email",
+    "remember_me": "Rememer me",
+    "forgot_password": "Forgot password",
+    "sign_in": "Sign in",
+    "sign_in_with_google": "Sign in with Google",
+    "dont_have_account": "Don't have account?",
+    "sign_up": "Sign up"
   }
-  
+}

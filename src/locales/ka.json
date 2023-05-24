@@ -20,5 +20,18 @@
     "sign_up_with_google": "გაიარე ავტორიზაცია გუგლით",
     "already_have_an_account": "უკვე გაქვს ექაუნთი?",
     "log_in": "შესვლა"
+  },
+  "login": {
+    "log_in_to_your_account": "პროფილში შესვლა",
+    "welcome_back": "გთხოვთ შეიყვანოთ თქვენი დეტალები.",
+    "email": "ელ-ფოსტა",
+    "password": "პაროლი",
+    "enter_your_email": "ელ-ფოსტა",
+    "remember_me": "დამახსოვრება",
+    "forgot_password": "დაგავიწყდა ",
+    "sign_in": "ავტორიზაცია",
+    "sign_in_with_google": "გაიარე ავტორიზაცია გუგლის ექაუნთით",
+    "dont_have_account": "ჯერ არ გაქვთ ექაუნთი?",
+    "sign_up": "დარეგისტრირდი"
   }
 }
