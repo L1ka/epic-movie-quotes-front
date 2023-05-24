@@ -1,5 +1,7 @@
 import '@/assets/main.css'
 import i18n from '@/plugins/index.js'
+import '@/config/vee-validate/rules.js'
+import '@/config/vee-validate/messages.js'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
