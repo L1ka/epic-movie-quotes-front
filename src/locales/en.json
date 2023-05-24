@@ -1,0 +1,25 @@
+{
+    "landing": {
+      "title": "Find any quote in millions of movie lines",
+      "movie_quotes": "Movie quotes",
+      "en": "Eng",
+      "ge": "Geo",
+      "sign_up": "Sign Up",
+      "log_in": "Log in"
+    },
+    "registration": {
+      "create_an_account": "Create an account",
+      "start_your_journey": "Start your journey!",
+      "name": "Name",
+      "enter_your_name": "Enter your name",
+      "enter_your_email": "Enter your email",
+      "email": "Email",
+      "password": "Password",
+      "confirm_password": "Confirm password",
+      "get_started": "Get started",
+      "sign_up_with_google": "Sign up with Google",
+      "already_have_an_account": "Already have an account?",
+      "log_in": "Log in"
+    }
+  }
+  

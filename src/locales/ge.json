@@ -1,0 +1,24 @@
+{
+  "landing": {
+    "title": "იპოვე მილიონობით ფილმის ციტატა",
+    "movie_quotes": "ფილმის ციტატები",
+    "en": "ინგლისური",
+    "ge": "ქართული",
+    "sign_up": "რეგისტრაცია",
+    "log_in": "ავტორიზაცია"
+  },
+  "registration": {
+    "create_an_account": "პროფილის შექმნა",
+    "start_your_journey": "დაიწყე შენი მოგზაურობა!",
+    "name": "სახელი",
+    "enter_your_name": "სახელი",
+    "enter_your_email": "ელ-ფოსტა",
+    "email": "ელ-ფოსტა",
+    "password": "პაროლი",
+    "confirm_password": "გაიმეორე პაროლი",
+    "get_started": "დაწყება",
+    "sign_up_with_google": "გაიარე ავტორიზაცია გუგლით",
+    "already_have_an_account": "უკვე გაქვს ექაუნთი?",
+    "log_in": "შესვლა"
+  }
+}
