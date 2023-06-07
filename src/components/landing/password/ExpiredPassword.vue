@@ -1,0 +1,65 @@
+<script setup>
+import IconExpired from '@/components/icons/IconExpired.vue'
+import { ref } from 'vue'
+import { onClickOutside } from '@vueuse/core'
+import { useRouter } from 'vue-router'
+import axiosInstance from '@/config/axios/index.js'
+const modal = ref(null)
+const route = useRouter()
+const open = ref(true)
+
+const props = defineProps({
+  token: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  }
+})
+
+onClickOutside(modal, () => {
+  route.push({ name: 'landing' })
+  open.value = false
+})
+
+const handleSubmit = async () => {
+  try {
+    await axiosInstance.post('/api/forgot-password', {
+      email: props.email
+    })
+    route.push({ name: 'confirm-password' })
+  } catch (error) {
+    console.log(error)
+  }
+}
+</script>
+
+<template>
+  <div>
+    <div
+      v-if="open"
+      class="fixed top-0 left-0 bottom-0 right-0 backdrop-blur-sm bg-black sm:bg-black/30"
+    ></div>
+    <div
+      v-if="open"
+      ref="modal"
+      class="pt-16 min-w-[90%] min-h-[50%] sm:min-w-[650px] sm:min-h-[400px] absolute top-[35%] sm:top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-20 bg-light-gray rounded-lg flex justify-center"
+    >
+      <div class="flex flex-col items-center text-white">
+        <icon-expired class="mb-[20px]"></icon-expired>
+        <h1 class="text-m mb-[30px]">{{ $t('expiration.link_expired') }}</h1>
+        <p class="text-sm text-center mb-[50px]">
+          {{ $t('expiration.unused_link_expired') }}
+        </p>
+        <button
+          class="text-white text-sm rounded py-[7px] px-12 sm:px-[125px] text-center bg-base-red mb-12"
+          @click="handleSubmit"
+        >
+          {{ $t('expiration.request_another_link') }}
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
