@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Helvetica Neue';
+    src: url('./fonts/Helvetica-Neue-Font/HelveticaNeueMediumExtended/HelveticaNeueMediumExtended.ttf');
+  }
+
+  html {
+    background: linear-gradient(187.16deg, #181623 0.07%, #191725 51.65%, #0d0b14 98.75%);
+    font-family: 'Helvetica Neue';
+  }
+
+  input:focus {
+    border: 1px solid #ced4da;
+    box-shadow: 0px 0px 0px 4px rgba(13, 110, 253, 0.25);
+    outline: none;
+  }
+
+  input:focus::placeholder {
+    color: transparent;
+  }
+}
