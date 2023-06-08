@@ -33,5 +33,31 @@
     "sign_in_with_google": "Sign in with Google",
     "dont_have_account": "Don't have account?",
     "sign_up": "Sign up"
+  },
+  "email": {
+    "thank_you": "Thank you!",
+    "account_activated": "Your account has been activated.",
+    "check_email": "Please check your email and follow the instructions to </br> activate your account.",
+    "open_email": "Go to my email"
+  },
+  "expiration": {
+    "link_expired": "Link expired!",
+    "unused_link_expired": "Login link has expired, because you haven’t used it",
+    "request_another_link": "Request another link"
+  },
+  "password": {
+    "check_email": "Check your email",
+    "instructions_sent": "We have sent a password recover instructions to your email",
+    "open_email": "Go to my email",
+    "skip_confirmation": "Skip, I’ll confirm later",
+    "forgot_password?": "Forgot password?",
+    "enter_email": " Enter the email and we’ll send an email with instructions to reset your password",
+    "send_instructions": " Send instructions",
+    "go_back": "Back to log in",
+    "create_new_password": "Create new password",
+    "enter_different_password": "Your new password must be different from previous used passwords",
+    "reset_password": "Reset password",
+    "success": "Success!",
+    "changed_successfully": "Your Password changed successfully"
   }
 }

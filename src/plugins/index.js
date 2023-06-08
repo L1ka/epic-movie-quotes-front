@@ -5,7 +5,7 @@ import ka from '@/locales/ka.json'
 const i18n = createI18n({
   legacy: false,
   globalInjection: true,
-  locale: 'en',
+  locale: localStorage.getItem('locale') || 'en',
   fallbackLocale: 'ka',
   messages: {
     en,
