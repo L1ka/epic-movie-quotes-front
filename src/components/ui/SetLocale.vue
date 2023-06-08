@@ -1,10 +1,11 @@
 <script setup>
 import IconDownArrow from '@/components/icons/IconDownArrow.vue'
 import { ref } from 'vue'
-import i18n from '@/plugins/index.js'
-import { setLocale } from '@vee-validate/i18n'
+import { useLocaleStore } from '@/store/locale.js'
+import { storeToRefs } from 'pinia'
 
-const locale = ref('Eng')
+const { changeLocale } = useLocaleStore()
+const { locale } = storeToRefs(useLocaleStore())
 const isVisible = ref(false)
 
 const toggle = () => {
@@ -13,15 +14,7 @@ const toggle = () => {
 
 const setActive = (e) => {
   isVisible.value = false
-  console.log(i18n.global.locale)
-  locale.value = e.target.value
-  if (locale.value == 'Geo' || locale.value == 'ქართული') {
-    setLocale('ka')
-    i18n.global.locale.value = 'ka'
-  } else {
-    setLocale('en')
-    i18n.global.locale.value = 'en'
-  }
+  changeLocale(e)
 }
 </script>
 
@@ -32,8 +25,8 @@ const setActive = (e) => {
       <icon-down-arrow></icon-down-arrow>
     </div>
     <div v-show="isVisible" class="flex flex-col absolute top-7 right-0.5 text-end">
-      <button value="Eng" class="text-end" @click="setActive">Eng</button>
-      <button value="Geo" class="text-end" @click="setActive">Geo</button>
+      <button value="en" class="text-end" @click="setActive">Eng</button>
+      <button value="ka" class="text-end" @click="setActive">Geo</button>
     </div>
   </div>
 </template>
