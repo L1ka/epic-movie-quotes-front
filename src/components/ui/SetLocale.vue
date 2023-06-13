@@ -19,7 +19,7 @@ const setActive = (e) => {
 </script>
 
 <template>
-  <div class="flex flex-col relative text-white cursor-pointer">
+  <div class="flex flex-col relative text-white cursor-pointer max-w-min">
     <div class="flex items-center" @click="toggle">
       <p class="mr-2">{{ locale }}</p>
       <icon-down-arrow></icon-down-arrow>
