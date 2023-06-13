@@ -1,0 +1,26 @@
+<script setup>
+import IconFilledHeart from '@/components/icons/IconFilledHeart.vue'
+</script>
+
+<template>
+  <div
+    class="flex border border-solid border-b-2 border-border text-sm text-white w-full py-4 px-4 mb-2 relative"
+  >
+    <div class="mr-4">
+      <img
+        src="@/assets/images/testimage.png"
+        alt=""
+        class="border border-solid border-b-2 border-light-green rounded-full h-12 w-12 md:w-16 md:h-16 mb-2"
+      />
+      <p class="text-light-green lg:absolute lg:right-4 lg:top-14">New</p>
+    </div>
+    <div class="flex flex-col">
+      <p class="text-sm-light">Nino Tabagari</p>
+      <div class="flex">
+        <icon-filled-heart class="mr-3"></icon-filled-heart>
+        <p>Reacted to your quote</p>
+      </div>
+      <p class="lg:absolute lg:right-4 lg:top-4">5 min ago</p>
+    </div>
+  </div>
+</template>
