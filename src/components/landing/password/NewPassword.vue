@@ -85,7 +85,7 @@ const handleSubmit = async () => {
         :errors="errors"
         :valid="meta.valid"
       ></the-input>
-      <button class="text-white text-sm rounded py-[7px] w-full text-center bg-base-red">
+      <button class="text-white text-sm rounded py-3 w-full text-center bg-base-red">
         {{ $t('password.reset_password') }}
       </button>
       <RouterLink :to="{ name: 'login' }" class="flex items-center mt-8 mb-12 cursor-pointer">

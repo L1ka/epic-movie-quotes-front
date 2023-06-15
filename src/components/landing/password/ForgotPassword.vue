@@ -55,10 +55,7 @@ const handleSubmit = async () => {
         :valid="meta.valid"
         :errorsFromBack="errorsFromBack"
       ></the-input>
-      <button
-        class="text-white text-sm rounded py-[7px] w-full text-center bg-base-red"
-        type="submit"
-      >
+      <button class="text-white text-sm rounded py-3 w-full text-center bg-base-red" type="submit">
         {{ $t('password.send_instructions') }}
       </button>
       <RouterLink :to="{ name: 'login' }" class="flex items-center mt-8 mb-12 cursor-pointer">
