@@ -33,7 +33,7 @@ function redirectToEmail() {
       <p class="text-sm text-center mb-[50px] text-[12px]">{{ $t('email.check_email') }}</p>
       <button
         @click="redirectToEmail"
-        class="text-white text-sm rounded px-[25px] py-[7px] md:px-[125px] text-center bg-base-red mb-[50px]"
+        class="text-white text-sm rounded px-[25px] py-3 md:px-[125px] text-center bg-base-red mb-[50px]"
       >
         {{ $t('email.open_email') }}
       </button>

@@ -29,7 +29,7 @@ onClickOutside(modal, () => {
       <p class="text-sm text-center mb-[50px]">{{ $t('password.changed_successfully') }}</p>
       <RouterLink
         :to="{ name: 'login' }"
-        class="text-white text-sm rounded py-[7px] px-[125px] text-center bg-base-red mb-[65px]"
+        class="text-white text-sm rounded py-3 px-[125px] text-center bg-base-red mb-[65px]"
       >
         {{ $t('registration.log_in') }}
       </RouterLink>

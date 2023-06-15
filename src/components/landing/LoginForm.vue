@@ -72,7 +72,7 @@ const handleSubmit = async () => {
 
     <button
       type="submit"
-      class="w-full mt-2 bg-base-red text-white rounded py-[7px] px-[13px] text-center"
+      class="w-full mt-2 bg-base-red text-white rounded py-3 px-[13px] text-center"
     >
       {{ $t('login.sign_in') }}
     </button>

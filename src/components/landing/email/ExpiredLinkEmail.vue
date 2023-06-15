@@ -51,7 +51,7 @@ const handleSubmit = async () => {
           {{ $t('expiration.unused_link_expired') }}
         </p>
         <button
-          class="text-white text-sm rounded py-[7px] sm:px-[125px] px-[25px] text-center bg-base-red mb-12"
+          class="text-white text-sm rounded py-3 sm:px-[125px] px-[25px] text-center bg-base-red mb-12"
           @click="handleSubmit"
         >
           {{ $t('expiration.request_another_link') }}

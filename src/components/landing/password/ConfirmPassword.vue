@@ -36,7 +36,7 @@ function redirectToEmail() {
       </p>
       <button
         @click="redirectToEmail"
-        class="text-white text-sm rounded py-[7px] w-full text-center bg-base-red"
+        class="text-white text-sm rounded py-3 w-full text-center bg-base-red"
       >
         {{ $t('password.open_email') }}
       </button>

@@ -53,7 +53,7 @@ const handleSubmit = async () => {
         <p class="text-sm text-center mb-[50px]">{{ $t('email.account_activated') }}</p>
         <RouterLink
           :to="{ name: 'login' }"
-          class="text-white text-sm rounded py-[7px] md:px-[125px] px-[100px] text-center bg-base-red mb-[50px]"
+          class="text-white text-sm rounded py-3 md:px-[125px] px-[100px] text-center bg-base-red mb-[50px]"
         >
           {{ $t('registration.log_in') }}
         </RouterLink>
