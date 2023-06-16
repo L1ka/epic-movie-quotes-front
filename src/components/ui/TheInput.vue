@@ -8,7 +8,7 @@ import { Field, ErrorMessage } from 'vee-validate'
 const props = defineProps({
   label: {
     type: String,
-    required: true
+    required: false
   },
   placeholder: {
     type: String,
@@ -60,7 +60,9 @@ const passwordIsVisible = ref(false)
 
 <template>
   <div class="flex flex-col mb-4 w-full">
-    <label for="name" class="text-white mb-2">{{ label }}<span class="text-red"> *</span></label>
+    <label for="name" class="text-white mb-2"
+      >{{ label }}<span v-if="label" class="text-red"> *</span></label
+    >
 
     <div class="relative flex flex-col">
       <Field
@@ -76,11 +78,11 @@ const passwordIsVisible = ref(false)
       />
 
       <icon-valid
-        :class="errors[name] || !modelValue ? 'hidden' : 'block'"
+        :class="errors?.[name] || !modelValue ? 'hidden' : 'block'"
         class="absolute right-6 top-[50%] translate-y-[-50%]"
       ></icon-valid>
       <icon-error-mark
-        v-if="errors[name]"
+        v-if="errors?.[name]"
         class="absolute right-6 top-[50%] translate-y-[-50%]"
       ></icon-error-mark>
       <icon-eye
