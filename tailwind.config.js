@@ -16,7 +16,7 @@ module.exports = {
         'light-black': '#24222F',
         'modal-black': '#11101A',
         'light-green': '#198754',
-        purple: '9747FF'
+        purple: '#9747FF'
       },
       fontSize: {
         sm: ['16px', { lineHeight: '24px', fontWeight: '400' }],

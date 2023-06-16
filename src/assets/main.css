@@ -19,7 +19,59 @@
     outline: none;
   }
 
+  textarea:focus {
+    outline: none;
+  }
+  textarea:focus::placeholder {
+    color: transparent;
+  }
+
+  textarea::placeholder {
+    font-style: italic;
+  }
+
   input:focus::placeholder {
     color: transparent;
+  }
+
+  #polygon {
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  }
+
+  input[type='file']::file-selector-button {
+    border: none;
+
+    color: #fff;
+    cursor: pointer;
+  }
+
+  #poster {
+    border: none;
+    background: rgba(151, 71, 255, 0.4);
+    padding: 10px;
+    border-radius: 2px;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    right: 25px;
+  }
+
+  input[type='file'] {
+    opacity: 0;
+  }
+
+  :root {
+    --ms-tag-bg: #6c757d;
+    --ms-tag-color: #fff;
+    --ms-tag-radius: 2px;
+    --ms-tag-font-weight: 200;
+    --ms-border-color: #6c757d;
+    --ms-bg: transparent;
+    --ms-dropdown-bg: #6c757d;
+    --ms-dropdown-border-color: #6c757d;
+    --ms-group-label-color: #fff;
+    --ms-border-width: 2px;
+    --ms-py: 1rem;
+    --ms-tag-py: 0.55rem;
   }
 }
