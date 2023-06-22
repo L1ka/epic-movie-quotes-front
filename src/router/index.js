@@ -74,7 +74,19 @@ const router = createRouter({
     {
       path: '/movie-list',
       name: 'movie-list',
-      component: () => import('@/views/MovieListPage.vue')
+      component: () => import('@/views/MovieListPage.vue'),
+      children: [
+        {
+          path: 'add',
+          name: 'add-movie',
+          component: () => import('@/components/movie-list/AddMovie.vue')
+        },
+        {
+          path: 'edit/:id',
+          name: 'edit-movie',
+          component: () => import('@/components/movie-list/EditMovie.vue')
+        }
+      ]
     },
     {
       path: '/profile',
