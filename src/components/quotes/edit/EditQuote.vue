@@ -24,13 +24,7 @@ const getQuotes = async () => {
   await axiosInstance
     .post('/api/get-quote', { id: route.params.quoteId })
     .then((res) => {
-      console.log(res.data)
-      //quotes.value = res.data.quotes
-
-      quotes.value = res.data.quote
-      quotes.value.quote = JSON.parse(quotes.value.quote)
-
-      console.log(quotes.value)
+      quotes.value = res.data.data
     })
     .catch((err) => console.log(err))
 }
@@ -51,7 +45,7 @@ onMounted(() => {
     ref="modal"
     v-if="quotes && show"
   >
-    <edit-quote-header :id="quotes.movie_id" :quoteId="quotes.id"></edit-quote-header>
+    <edit-quote-header :quoteId="quotes.id"></edit-quote-header>
 
     <div class="px-8">
       <user-card></user-card>

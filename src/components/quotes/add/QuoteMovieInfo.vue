@@ -17,10 +17,10 @@ const getMovies = async () => {
   await axiosInstance
     .post('/api/get-movie', { id: props.id })
     .then((res) => {
-      movie.value = res.data.movie
-      movie.value.title = JSON.parse(res.data.movie.title)
-      movie.value.director = JSON.parse(res.data.movie.director)
-      movie.value.discription = JSON.parse(res.data.movie.discription)
+      movie.value = res.data.data
+      // movie.value.title = JSON.parse(res.data.movie.title)
+      // movie.value.director = JSON.parse(res.data.movie.director)
+      // movie.value.discription = JSON.parse(res.data.movie.discription)
     })
     .catch((err) => console.log(err))
 }

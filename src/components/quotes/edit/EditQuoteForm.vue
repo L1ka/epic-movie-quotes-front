@@ -9,7 +9,6 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const quotes = ref(null)
 const props = defineProps({
-  id: { type: Number, required: true },
   quoteId: { type: Number, required: true }
 })
 
@@ -34,12 +33,10 @@ const handleSubmit = async (data) => {
 }
 
 const getQuotes = async () => {
-  console.log(props.id)
   await axiosInstance
     .post('/api/get-quote', { id: props.quoteId })
     .then((res) => {
-      quotes.value = res.data.quote
-      quotes.value.quote = JSON.parse(quotes.value.quote)
+      quotes.value = res.data.data
     })
     .catch((err) => console.log(err))
 }
