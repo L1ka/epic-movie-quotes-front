@@ -1,0 +1,24 @@
+<script setup>
+import { useUserStore } from '@/store/getUser.js'
+import { storeToRefs } from 'pinia'
+
+const props = defineProps({
+  title: { type: String, required: true },
+  name: { type: String, required: true },
+  id: { type: String, required: true }
+})
+
+const { user } = storeToRefs(useUserStore())
+</script>
+
+<template>
+  <div class="flex flex-col text-white mb-6 w-full" v-if="name">
+    <p class="mb-2">{{ title }}</p>
+    <div class="flex items-center justify-between w-full border-b-2 border-border lg:border-none">
+      <p class="lg:bg-gray px-3 py-3 lg:text-dark-gray lg:w-[750px] rounded-md">
+        {{ name == 'password' ? '*******' : user[name] }}
+      </p>
+      <p @click="$emit('show', id)" class="p-4">Edit</p>
+    </div>
+  </div>
+</template>
