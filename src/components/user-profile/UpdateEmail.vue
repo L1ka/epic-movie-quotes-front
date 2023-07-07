@@ -28,7 +28,7 @@ function redirectToEmail() {
   <div
     v-if="open"
     ref="modal"
-    class="pt-6 z-50 sm:pt-16 w-[80%] h-[50%] sm:w-[60%] lg:w-[40%] 2xl:w-[30%] sm:h-fit absolute top-[35%] sm:top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-light-gray rounded-lg flex justify-center"
+    class="pt-6 z-50 sm:pt-16 w-[80%] h-[50%] sm:w-[60%] lg:w-[40%] 2xl:w-[30%] sm:h-fit absolute top-[35%] sm:top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-light-gray rounded-lg flex justify-center overflow-y-scroll max-h-[1000px]"
   >
     <div class="flex flex-col items-center text-white w-[90%]">
       <icon-email class="text-m mb-[20px]"></icon-email>
