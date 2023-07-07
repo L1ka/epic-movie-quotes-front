@@ -11,7 +11,7 @@ import IconCircle from '@/components/icons/IconCircle.vue'
       <p class="text-[#9C9A9A] text-sm">8 or more characters</p>
     </div>
     <div class="flex items-center">
-      <icon-circle class="mr-2 fill-red"></icon-circle>
+      <icon-circle class="mr-2 fill-green"></icon-circle>
       <p class="text-white text-sm">15 lowercase character</p>
     </div>
   </div>
