@@ -1,6 +1,7 @@
 <script setup>
 import IconFilledHeart from '@/components/icons/IconFilledHeart.vue'
 import IconComment from '@/components/icons/IconComment.vue'
+import { computed } from 'vue'
 
 const backUrl = import.meta.env.VITE_API_BASE_URL
 const props = defineProps({
@@ -9,6 +10,10 @@ const props = defineProps({
   comment: { type: Boolean, required: false },
   seen: { type: [Boolean, Number], required: false }
 })
+
+const hasBorder = computed(() => {
+  return props.seen === 0 && (props.like || props.comment) ? 'border-2 border-green' : ''
+})
 </script>
 
 <template>
@@ -16,7 +21,7 @@ const props = defineProps({
     <div
       :style="{ 'background-image': 'url(' + backUrl + user.image + ')' }"
       class="w-14 h-14 mr-4 bg-cover bg-no-repeat bg-center rounded-full mb-2"
-      :class="seen == 0 && (like || comment) ? 'border-2 border-green' : ''"
+      :class="hasBorder"
     ></div>
     <div>
       <p class="text-white text-sm lg:text-sm-bold capitalize mb-3">{{ user.first_name }}</p>
