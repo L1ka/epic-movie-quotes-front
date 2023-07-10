@@ -1,0 +1,26 @@
+<script setup>
+import UserCard from '@/components/news-feed/UserCard.vue'
+import { useDateStore } from '@/store/getDate.js'
+
+const props = defineProps({ notification: { type: Object, required: true } })
+const { getDate } = useDateStore()
+
+const date = getDate(props.notification.created_at)
+</script>
+
+<template>
+  <div
+    class="flex border border-solid border-b-2 border-border py-4 px-4 text-white w-full mb-2 relative"
+  >
+    <div class="flex flex-col">
+      <user-card :user="notification.user" :comment="true" :seen="notification.seen"></user-card>
+      <div class="flex">
+        <p class="text-light-green lg:absolute lg:right-4 lg:top-14 mr-8" v-if="!notification.seen">
+          New
+        </p>
+
+        <p class="lg:absolute lg:right-4 lg:top-4">{{ date }}</p>
+      </div>
+    </div>
+  </div>
+</template>

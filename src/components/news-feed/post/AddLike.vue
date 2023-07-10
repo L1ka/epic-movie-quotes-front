@@ -15,7 +15,6 @@ const props = defineProps({
 
 const quote = ref(props.quote)
 const showAllItems = ref(false)
-console.log(showAllItems.value)
 
 const show = () => {
   showAllItems.value = !showAllItems.value

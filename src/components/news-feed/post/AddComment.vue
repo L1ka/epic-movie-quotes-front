@@ -1,12 +1,11 @@
 <script setup>
 import { storeToRefs } from 'pinia'
-import { useUrlStore } from '@/store/backUrl.js'
 import { useUserStore } from '@/store/getUser.js'
 import { Form, Field } from 'vee-validate'
 import axiosInstance from '@/config/axios/index.js'
 import { onMounted, ref } from 'vue'
 
-const { backUrl } = useUrlStore()
+const backUrl = import.meta.env.VITE_API_BASE_URL
 const { getUser } = useUserStore()
 const { user } = storeToRefs(useUserStore())
 const comment = ref('')

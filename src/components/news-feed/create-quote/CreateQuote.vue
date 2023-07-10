@@ -16,7 +16,7 @@ const updateQuotes = () => {
     @click="open = !open"
   >
     <icon-pencil class="mr-4"></icon-pencil>
-    <p class="text-sm">Write new quote</p>
+    <p class="text-sm">{{ $t('quote.new_quote') }}</p>
   </div>
   <quote-form v-if="open" @update="updateQuotes"></quote-form>
 </template>

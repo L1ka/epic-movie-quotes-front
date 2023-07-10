@@ -1,5 +1,9 @@
 <script setup>
 import IconSearch from '@/components/icons/IconSearch.vue'
+
+const props = defineProps({
+  modelValue: { type: [String, Boolean], required: true }
+})
 </script>
 
 <template>
@@ -9,8 +13,11 @@ import IconSearch from '@/components/icons/IconSearch.vue'
     <input
       name="search"
       type="search"
-      placeholder="Search by"
+      :placeholder="$t('quote.quote_placeholder')"
       class="bg-transparent focus:shadow-none text-white text-sm py-1 indent-3 w-[95%]"
+      @keydown.enter="$emit('handleSearch', $event.target.value)"
+      @input="$emit('update:modelValue', $event.target.value)"
+      :value="modelValue"
     />
   </div>
 </template>
