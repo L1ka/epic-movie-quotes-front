@@ -1,12 +1,16 @@
 <script setup>
+import DeleteConfirmation from '@/components/quotes/DeleteConfirmation.vue'
 import IconExit from '@/components/icons/IconExit.vue'
 import IconTrash from '@/components/icons/IconTrash.vue'
 import axiosInstance from '@/config/axios/index.js'
 import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 
 const router = useRouter()
+const showConfirmation = ref(false)
 const props = defineProps({
-  quoteId: { type: Number, required: true }
+  quoteId: { type: Number, required: true },
+  quote: { type: Object, required: true }
 })
 
 const close = () => {
@@ -14,23 +18,26 @@ const close = () => {
 }
 
 const deleteQuote = async () => {
-  await axiosInstance
-    .post('/api/quote/delete', { id: props.quoteId })
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err))
-
+  await axiosInstance.post('/api/quote/delete', { id: props.quoteId })
   close()
 }
 </script>
 
 <template>
   <div class="border-b-2 border-border py-8 px-8 flex justify-between">
-    <div class="flex" @click="deleteQuote()">
+    <div class="flex" @click="showConfirmation = !showConfirmation">
       <icon-trash class="w-6 mr-2"></icon-trash>
-      <p class="hidden md:block">Delete</p>
+      <p class="hidden md:block">{{ $t('edit_quote.delete') }}</p>
     </div>
 
-    <p>Edit quote</p>
+    <delete-confirmation
+      v-if="showConfirmation"
+      :quote="quote"
+      @cancel="close"
+      @delete-item="deleteQuote"
+    ></delete-confirmation>
+
+    <p>{{ $t('edit_quote.header') }}</p>
 
     <icon-exit @click="close"></icon-exit>
   </div>

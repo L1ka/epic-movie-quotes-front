@@ -11,46 +11,43 @@ const route = useRoute()
 const router = useRouter()
 const modal = ref(null)
 const show = ref(true)
-const quotes = ref(null)
+const quote = ref(null)
 
 const close = () => {
   show.value = false
-  router.push({ name: 'movie-description', params: { id: quotes.value.movie_id } })
+  router.push({ name: 'movie-description', params: { id: quote.value.movie_id } })
 }
 
 onClickOutside(modal, close)
 
-const getQuotes = async () => {
-  await axiosInstance
-    .post('/api/get-quote', { id: route.params.quoteId })
-    .then((res) => {
-      quotes.value = res.data.data
-    })
-    .catch((err) => console.log(err))
+const getQuote = async () => {
+  await axiosInstance.post('/api/get-quote', { id: route.params.quoteId }).then((res) => {
+    quote.value = res.data.data
+  })
 }
 
 onMounted(() => {
-  getQuotes()
+  getQuote()
 })
 </script>
 
 <template>
   <div
-    class="rounded-lg absolute top-0 left-0 right-0 bottom-0 text-white backdrop-blur-sm bg-black/30"
-    v-if="show && quotes"
-  ></div>
-
-  <div
-    class="text-white bg-black absolute top-0 left-0 right-0 lg:top-24 lg:left-[15%] lg:w-[60%]"
-    ref="modal"
-    v-if="quotes && show"
+    class="rounded-lg flex justify-center absolute top-0 left-0 right-0 bottom-0 text-white backdrop-blur-sm bg-black/30 z-40"
+    v-if="show && quote"
   >
-    <edit-quote-header :quoteId="quotes.id"></edit-quote-header>
+    <div
+      class="text-white z-50 bg-black lg:mt-24 lg:w-[60%] overflow-y-scroll max-h-[1000px]"
+      ref="modal"
+      v-if="quote && show"
+    >
+      <edit-quote-header :quoteId="quote.id" :quote="quote.quote"></edit-quote-header>
 
-    <div class="px-8">
-      <user-card></user-card>
+      <div class="px-8">
+        <user-card></user-card>
 
-      <edit-quote-form :id="quotes.movie_id" :quoteId="quotes.id"></edit-quote-form>
+        <edit-quote-form :quote="quote"></edit-quote-form>
+      </div>
     </div>
   </div>
 </template>

@@ -3,57 +3,49 @@ import AddImage from '@/components/quotes/edit/AddImage.vue'
 import TheInput from '@/components/quotes/edit/TheInput.vue'
 import axiosInstance from '@/config/axios/index.js'
 import { Form } from 'vee-validate'
-import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const quotes = ref(null)
-const props = defineProps({
-  quoteId: { type: Number, required: true }
-})
+const props = defineProps({ quote: { type: Object, required: true } })
 
 const handleSubmit = async (data) => {
   const formData = new FormData()
   formData.append('image', data.image)
 
-  await axiosInstance
-    .post(
-      'api/quote/update',
-      { ...data, ...formData, id: quotes.value.id },
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+  await axiosInstance.post(
+    'api/quote/update',
+    { ...data, ...formData, id: props.quote.id },
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data'
       }
-    )
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err))
+    }
+  )
 
-  router.push({ name: 'movie-description', params: { id: quotes.value.movie_id } })
+  router.replace({ name: 'movie-description', params: { id: props.quote.movie_id } })
 }
-
-const getQuotes = async () => {
-  await axiosInstance
-    .post('/api/get-quote', { id: props.quoteId })
-    .then((res) => {
-      quotes.value = res.data.data
-    })
-    .catch((err) => console.log(err))
-}
-
-onMounted(() => {
-  getQuotes()
-})
 </script>
 
 <template>
-  <Form @submit="handleSubmit" v-if="quotes">
-    <the-input name="quote.en" language="Eng" :value="quotes.quote.en"></the-input>
+  <Form @submit="handleSubmit" v-if="quote">
+    <the-input
+      name="quote.en"
+      language="Eng"
+      :value="quote.quote.en"
+      rules="required|min:3|max:30|alpha_num"
+    ></the-input>
 
-    <the-input name="quote.ka" language="ქარ" :value="quotes.quote.ka"></the-input>
+    <the-input
+      name="quote.ka"
+      language="ქარ"
+      :value="quote.quote.ka"
+      rules="required|min:3|max:30|geo_num"
+    ></the-input>
 
-    <add-image :image="quotes.image"> </add-image>
+    <add-image :image="quote.image"> </add-image>
 
-    <button class="bg-base-red w-full py-4 rounded-md mb-10">Save changes</button>
+    <button class="bg-base-red w-full py-4 rounded-md mb-10">
+      {{ $t('edit_quote.save') }}
+    </button>
   </Form>
 </template>

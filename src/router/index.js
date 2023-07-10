@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LandingPage from '@/views/LandingPage.vue'
+import Cookies from 'js-cookie'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -67,31 +68,96 @@ const router = createRouter({
       ]
     },
     {
-      path: '/news-feed',
-      name: 'news-feed',
-      component: () => import('@/views/NewsFeedPage.vue')
-    },
-    {
-      path: '/movie-list',
-      name: 'movie-list',
-      component: () => import('@/views/MovieListPage.vue'),
+      path: '/account',
+      name: 'account',
+      component: () => import('@/views/AccountPage.vue'),
+      beforeEnter: (to, from, next) => {
+        const isAuthorized =
+          (Cookies.get('XSRF-TOKEN') || Cookies.get('laravel_session')) !== undefined &&
+          localStorage.getItem('authorized')
+        if (isAuthorized) {
+          next()
+        } else {
+          next({ name: 'access-forbidden' })
+        }
+      },
+      redirect: { path: '/news-feed' },
       children: [
         {
-          path: 'add',
-          name: 'add-movie',
-          component: () => import('@/components/movie-list/AddMovie.vue')
+          path: '/news-feed',
+          name: 'news-feed',
+          component: () => import('@/views/NewsFeedPage.vue'),
+          children: [
+            {
+              path: 'add-quote',
+              name: 'news-feed-quote',
+              component: () => import('@/components/news-feed/create-quote/QuoteForm.vue')
+            }
+          ]
         },
         {
-          path: 'edit/:id',
-          name: 'edit-movie',
-          component: () => import('@/components/movie-list/EditMovie.vue')
+          path: '/movie-list',
+          name: 'movie-list',
+          component: () => import('@/views/MovieListPage.vue'),
+          children: [
+            {
+              path: 'add',
+              name: 'add-movie',
+              component: () => import('@/components/movie-list/add/AddMovie.vue')
+            },
+            {
+              path: 'edit/:id',
+              name: 'edit-movie',
+              component: () => import('@/components/movie-list/edit/EditMovie.vue')
+            }
+          ]
+        },
+        {
+          path: '/movie-description/:id',
+          name: 'movie-description',
+          component: () => import('@/views/MovieDescription.vue'),
+          children: [
+            {
+              path: 'add',
+              name: 'add-quote',
+              component: () => import('@/components/quotes/add/AddQuote.vue')
+            },
+            {
+              path: 'view/:quoteId',
+              name: 'view-quote',
+              component: () => import('@/components/quotes/view/ViewQuote.vue')
+            },
+            {
+              path: 'edit/:quoteId',
+              name: 'edit-quote',
+              component: () => import('@/components/quotes/edit/EditQuote.vue')
+            }
+          ]
+        },
+        {
+          path: '/profile',
+          name: 'profile',
+          component: () => import('@/views/ProfilePage.vue'),
+          children: [
+            {
+              path: 'update-email',
+              name: 'update-email',
+              component: () => import('@/components/user-profile/UpdateEmail.vue')
+            }
+          ]
         }
       ]
     },
+
     {
-      path: '/profile',
-      name: 'profile',
-      component: () => import('@/views/ProfilePage.vue')
+      path: '/:catchAll(.*)',
+      name: 'not-found',
+      component: () => import('@/views/error-pages/NotFound.vue')
+    },
+    {
+      path: '/403',
+      name: 'access-forbidden',
+      component: () => import('@/views/error-pages/AccessForbidden.vue')
     }
   ]
 })
