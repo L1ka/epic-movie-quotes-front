@@ -6,7 +6,7 @@ export const useUserStore = defineStore('getUser', () => {
   let user = ref('')
   const getUser = async () => {
     try {
-      await axiosInstance.post(`/api/user`).then((response) => (user.value = response.data.data))
+      await axiosInstance.get(`/api/user`).then((response) => (user.value = response.data.data))
     } catch (error) {
       console.log(error)
     }
