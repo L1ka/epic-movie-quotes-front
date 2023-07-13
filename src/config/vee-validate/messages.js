@@ -10,10 +10,13 @@ configure({
       messages: {
         required: 'This field is required',
         min: '{field} should contain at least 0:{min} character',
-        // lower_case: 'use lower case characters',
         alpha_num_lower: 'use lower case alphanumerical Latin characters',
+        geo_num: 'use georgian letters',
         max: '{field} can contain max 0:{max} character',
-        confirmed: 'confirm password does not match password'
+        confirmed: 'confirm password does not match password',
+        alpha: 'use Latin characters',
+        alpha_latin: 'use Latin characters',
+        numeric: 'should contain 4 digit number'
       },
       names: {
         first_name: 'name',
@@ -27,9 +30,13 @@ configure({
         min: '{field}ს ველი უნდა შედგებოდეს მინიმუმ 0:{min} სიმბოლოსგან',
         max: '{field}ს ველი უნდა შედგებოდეს მინიმუმ 0:{max} სიმბოლოსგან',
         email: 'თქვენ მიერ შეყვანილი მეილი არასწორია',
-        // lower_case: 'გამოიყენეთ დაბალი რეგისტრის სიმბოლოები',
         alpha_num_lower: 'გამოიყენეთ დაბალი რეგისტრის ლათინური სიმბოლოები და რიცხვები',
-        confirmed: 'განმეორებითი პაროლი არ ემთხვევა პაროლს'
+        geo_num: 'გამოიყენეთ ქართული სიმბოლოები',
+        confirmed: 'განმეორებითი პაროლი არ ემთხვევა პაროლს',
+        alpha: 'გამოიყენეთ ქართული სიმბოლოები',
+        numeric: 'აღნიშნული ველი უნდა შედგებოდეს 4 ციფრისგან',
+        image: 'ფოტოს ფორმატი არასწორია',
+        alpha_geo: 'გამოიყენეთ ლათინური სიმბოლოები'
       },
       names: {
         email: 'ელ.ფოსტი',
