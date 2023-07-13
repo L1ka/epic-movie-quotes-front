@@ -2,25 +2,50 @@
 import IconHouse from '@/components/icons/IconHouse.vue'
 import IconCamera from '@/components/icons/IconCamera.vue'
 import SetLocale from '@/components/ui/SetLocale.vue'
-import { useRoute } from 'vue-router'
+import axiosInstance from '@/config/axios/index.js'
+import { useRoute, useRouter } from 'vue-router'
+import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/store/getUser.js'
 
 const route = useRoute()
+const router = useRouter()
+const { user } = storeToRefs(useUserStore())
+const backUrl = import.meta.env.VITE_API_BASE_URL
+
+const logout = async () => {
+  await axiosInstance.post('api/logout').then(() => {
+    router.push({ name: 'landing' })
+  })
+}
+
+const movieListActive = computed(() => {
+  return route.path.startsWith('/movie-description') || route.path.startsWith('/movie-list')
+    ? 'fill-red'
+    : 'fill-white'
+})
+const newsFeedActive = computed(() => {
+  return route.path.startsWith('/news-feed') ? 'fill-red' : 'fill-white'
+})
+
+const hasBorder = computed(() => {
+  return route.path === '/profile' ? 'border-2  border-base-red' : ''
+})
 </script>
 
 <template>
   <div
-    class="px-12 py-6 md:px-7 absolute top-0 left-0 right-[10%] lg:top-[6%] lg:right-[80%] lg:bg-transparent text-white bg-black"
+    class="px-12 py-6 md:px-7 fixed z-10 top-0 left-0 right-[10%] lg:top-24 lg:right-[80%] lg:bg-transparent text-white bg-black"
   >
     <router-link :to="{ name: 'profile' }" class="flex items-center mb-10 pt-8">
-      <img
-        src="@/assets/images/testimage.png"
-        alt=""
-        class="rounded-full h-12 w-12 mr-4 xl:w-14 xl:h-14"
-        :class="route.path === '/profile' ? 'border-2  border-base-red' : ''"
-      />
+      <div
+        :style="{ 'background-image': 'url(' + backUrl + user.image + ')' }"
+        class="w-14 h-14 mr-4 bg-cover bg-no-repeat bg-center rounded-full mb-2"
+        :class="hasBorder"
+      ></div>
       <div class="flex flex-col lg:text-xs xl:text-sm">
-        <p class="text-white text-sm lg:text-sm capitalize">Maia Nakashidze</p>
-        <p class="text-xs text-gray">Edit your profile</p>
+        <p class="text-white text-sm lg:text-sm capitalize">{{ user.first_name }}</p>
+        <p class="text-xs text-gray">{{ $t('side_bar.edit_profile') }}</p>
       </div>
     </router-link>
 
@@ -28,22 +53,16 @@ const route = useRoute()
       :to="{ name: 'news-feed' }"
       class="flex items-center mb-12 ml-2 lg:text-xs xl:text-sm"
     >
-      <icon-house
-        class="mr-10 lg:mr-6"
-        :class="route.path === '/news-feed' ? 'fill-red' : 'fill-white'"
-      ></icon-house>
-      <p>News feed</p>
+      <icon-house class="mr-10 lg:mr-6" :class="newsFeedActive"></icon-house>
+      <p>{{ $t('side_bar.news_feed') }}</p>
     </router-link>
 
     <router-link
       :to="{ name: 'movie-list' }"
       class="flex items-center ml-2 lg:text-xs xl:text-sm mb-12"
     >
-      <icon-camera
-        class="mr-10 lg:mr-6"
-        :class="route.path === '/movie-list' ? 'fill-red' : 'fill-white'"
-      ></icon-camera>
-      <p>List of movies</p>
+      <icon-camera class="mr-10 lg:mr-6" :class="movieListActive"></icon-camera>
+      <p>{{ $t('side_bar.my_movies') }}</p>
     </router-link>
 
     <set-locale class="lg:hidden mb-14 ml-2"></set-locale>
@@ -52,7 +71,7 @@ const route = useRoute()
       class="text-white py-2 px-4 rounded-md border border-white lg:hidden ml-2"
       @click="logout"
     >
-      Log out
+      {{ $t('logout') }}
     </button>
   </div>
 </template>
