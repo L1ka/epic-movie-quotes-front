@@ -1,8 +1,10 @@
 <script setup>
 import IconSearch from '@/components/icons/IconSearch.vue'
 import IconPlus from '@/components/icons/IconPlus.vue'
+import { ref } from 'vue'
 
 const props = defineProps({ totalMovies: { type: Number, required: true } })
+const show = ref(false)
 </script>
 
 <template>
@@ -15,12 +17,13 @@ const props = defineProps({ totalMovies: { type: Number, required: true } })
     </p>
 
     <div class="flex items-center">
-      <div class="items-center mr-8 hidden lg:flex">
-        <icon-search class="mr-8"></icon-search>
+      <div class="items-center mr-8 fixed top-7 right-16 z-40 md:static flex">
+        <icon-search class="mr-2 md:mr-8" @click="show = !show"></icon-search>
         <input
           type="search"
           :placeholder="$t('my_movies.search')"
-          class="bg-transparent w-28 focus:w-48"
+          class="bg-transparent md:w-28 md:focus:w-48 w-16 md:block indent-2 focus:shadow-none focus:border-0 focus:border-b-2 focus:outline-none"
+          :class="show ? 'block' : 'hidden'"
           @keydown.enter="$emit('handleSearch', $event.target.value)"
         />
       </div>

@@ -4,32 +4,21 @@ import AddComment from '@/components/news-feed/post/AddComment.vue'
 import AddLike from '@/components/news-feed/post/AddLike.vue'
 import PostCardHeader from '@/components/news-feed/post/PostCardHeader.vue'
 import { Form } from 'vee-validate'
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps({
-  quote: { type: Object, required: true },
-  userId: { type: Number, required: true }
+  quotes: { type: Array, required: true }
 })
-
-const quote = ref(props.quote)
 
 const showAllItems = ref(false)
 const show = (e) => {
   showAllItems.value = e
 }
-
-onMounted(() => {
-  window.Echo.channel('comments').listen('AddComment', (data) => {
-    if (quote.value.id === data.movie.quote_id) {
-      quote.value.comments.unshift(data.movie)
-    }
-  })
-})
 </script>
 
 <template>
-  <div v-if="quote.movie" class="lg:w-[70%] xl:w-[55%]">
-    <Form class="px-8 py-6 bg-black mb-10 rounded-md lg:mr-7">
+  <div v-for="(quote, index) in quotes" :key="index" class="lg:w-full">
+    <Form v-if="quote.movie" class="px-8 py-6 bg-black mb-10 rounded-md lg:mr-7">
       <div class="text-white">
         <post-card-header :quote="quote" :movie="quote.movie"></post-card-header>
 

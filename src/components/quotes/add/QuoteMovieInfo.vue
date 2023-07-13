@@ -13,7 +13,7 @@ const movie = ref(null)
 const { selectedLocale } = storeToRefs(useLocaleStore())
 
 const getMovies = async () => {
-  await axiosInstance.post('/api/get-movie', { id: props.id }).then((res) => {
+  await axiosInstance.get(`/api/get-movie/${props.id}`).then((res) => {
     movie.value = res.data.data
   })
 }

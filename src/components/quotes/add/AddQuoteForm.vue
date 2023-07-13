@@ -16,7 +16,7 @@ const props = defineProps({
 
 const handleSubmit = async (data) => {
   await axiosInstance.post(
-    'api/quote/create',
+    'api/quote/store',
     {
       ...data,
       ...{ image: props.image ? props.image : data.image },
@@ -45,7 +45,7 @@ const handleSubmit = async (data) => {
         as="textarea"
         name="quote.en"
         rows="4"
-        rules="required|min:3|max:30|alpha_num"
+        rules="required|min:3|max:30|alpha_latin"
         placeholder="Start create new quote"
         class="bg-transparent rounded-lg indent-3 pt-4 w-full border-2 border-border pr-16 pl-2 md:placeholder:text-sm-m"
       />
@@ -57,7 +57,7 @@ const handleSubmit = async (data) => {
         as="textarea"
         name="quote.ka"
         rows="4"
-        rules="required|min:3|max:30|geo_num"
+        rules="required|min:3|max:30|alpha_geo"
         placeholder="ახალი ციტატა"
         class="bg-transparent rounded-lg indent-3 pt-4 w-full border-2 border-border pr-16 pl-2 md:placeholder:text-sm-m"
       />

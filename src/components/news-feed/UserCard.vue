@@ -12,7 +12,7 @@ const props = defineProps({
 })
 
 const hasBorder = computed(() => {
-  return props.seen === 0 && (props.like || props.comment) ? 'border-2 border-green' : ''
+  return props.seen == (0 || false) && (props.like || props.comment) ? 'border-2 border-green' : ''
 })
 </script>
 
@@ -24,15 +24,17 @@ const hasBorder = computed(() => {
       :class="hasBorder"
     ></div>
     <div>
-      <p class="text-white text-sm lg:text-sm-bold capitalize mb-3">{{ user.first_name }}</p>
+      <p class="text-white text-sm lg:text-sm-bold capitalize mb-3">
+        {{ user.first_name }}
+      </p>
       <div class="flex mb-3" v-if="like">
         <icon-filled-heart class="mr-3"></icon-filled-heart>
-        <p>Reacted to your quote</p>
+        <p>{{ $t('notifications.reacted') }}</p>
       </div>
 
       <div class="flex" v-if="comment">
         <icon-comment class="mr-3"></icon-comment>
-        <p>Commented to your quote..</p>
+        <p>{{ $t('notifications.commented') }}</p>
       </div>
     </div>
   </div>

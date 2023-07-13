@@ -1,19 +1,18 @@
 <script setup>
 import IconHeart from '@/components/icons/IconHeart.vue'
 import IconMessage from '@/components/icons/IconMessage.vue'
-import { onMounted, ref } from 'vue'
 import axiosInstance from '@/config/axios/index.js'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store/getUser.js'
+import { ref } from 'vue'
 
-const { getUser } = useUserStore()
 const { user } = storeToRefs(useUserStore())
+const emit = defineEmits(['update'])
 
 const props = defineProps({
   quote: { type: Object, required: true }
 })
 
-const quote = ref(props.quote)
 const showAllItems = ref(false)
 
 const show = () => {
@@ -22,23 +21,13 @@ const show = () => {
 }
 
 const addLikes = async (id) => {
-  console.log(props.quote.movie.id)
   await axiosInstance.post('/api/create-like', {
     user_id: user.value.id,
     quote_id: id,
     movie_id: props.quote.movie.id
   })
+  emit('update')
 }
-
-onMounted(() => {
-  getUser()
-
-  window.Echo.channel('likes').listen('AddLike', (data) => {
-    if (quote.value.id === data.likes.quote_id) {
-      quote.value.likes_count = data.likes.count
-    }
-  })
-})
 </script>
 
 <template>

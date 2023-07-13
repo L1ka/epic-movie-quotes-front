@@ -3,6 +3,7 @@ import TheInput from '@/components/ui/TheInput.vue'
 import { reactive, ref } from 'vue'
 import { Form } from 'vee-validate'
 import axiosInstance from '@/config/axios/index.js'
+import { useRouter } from 'vue-router'
 
 const form = reactive({
   email: '',
@@ -11,6 +12,7 @@ const form = reactive({
 })
 
 let errorsFromBack = ref([])
+const router = useRouter()
 
 const handleSubmit = async () => {
   await axiosInstance.get('/sanctum/csrf-cookie')
@@ -21,11 +23,10 @@ const handleSubmit = async () => {
       password: form.password,
       remember: form.remember
     })
-    .then((response) => {
-      console.log(response)
+    .then(() => {
+      router.push({ name: 'account' })
     })
     .catch((error) => {
-      console.log(error)
       errorsFromBack.value = error.response.data.errors
     })
 }
