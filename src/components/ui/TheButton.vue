@@ -2,18 +2,9 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 const props = defineProps({
-  title: {
-    type: String,
-    required: true
-  },
-  color: {
-    type: String,
-    required: false
-  },
-  to: {
-    type: String,
-    required: true
-  }
+  title: { type: String, required: true },
+  color: { type: String, required: false },
+  to: { type: String, required: true }
 })
 </script>
 

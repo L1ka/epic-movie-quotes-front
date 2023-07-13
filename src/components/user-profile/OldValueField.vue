@@ -18,7 +18,7 @@ const { user } = storeToRefs(useUserStore())
       <p class="lg:bg-gray px-3 py-3 lg:text-dark-gray lg:w-[750px] rounded-md">
         {{ name == 'password' ? '*******' : user[name] }}
       </p>
-      <p @click="$emit('show', id)" class="p-4">Edit</p>
+      <p @click="$emit('show', id)" class="p-4">{{ $t('profile.edit') }}</p>
     </div>
   </div>
 </template>

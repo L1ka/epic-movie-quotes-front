@@ -31,7 +31,7 @@ onClickOutside(modal, () => {
 
 onMounted(async () => {
   await axiosInstance
-    .post('api/get-movie', { id: id })
+    .get(`api/get-movie/${id}`)
     .then((res) => {
       console.log(res)
       movie.value = res.data.data
@@ -79,7 +79,6 @@ const onDrop = (e) => {
 const handleSubmit = async (data) => {
   if (!value.value.length) return
 
-  console.log(data, 'uuuu', image.value)
   await axiosInstance
     .post(
       'api/movie/update',
@@ -119,7 +118,7 @@ const handleSubmit = async (data) => {
         :value="movie.title.en"
         label="Movie name"
         name="title.en"
-        rules="required|min:3|max:30|alpha_num"
+        rules="required|min:3|max:30|alpha_latin"
         lang="Eng"
       ></the-input>
 
@@ -127,7 +126,7 @@ const handleSubmit = async (data) => {
         :value="movie.title.ka"
         label="ფილმის სახელი"
         name="title.ka"
-        rules="required|min:3|max:30|geo_num"
+        rules="required|min:3|max:30|alpha_geo"
         lang="ქარ"
       ></the-input>
 
@@ -156,7 +155,7 @@ const handleSubmit = async (data) => {
         :value="movie.director.en"
         label="Director"
         name="director.en"
-        rules="required|min:3|max:30|alpha_num"
+        rules="required|min:3|max:30|alpha_latin"
         lang="Eng"
       ></the-input>
 
@@ -164,7 +163,7 @@ const handleSubmit = async (data) => {
         :value="movie.director.ka"
         label="რეჟისორი"
         name="director.ka"
-        rules="required|min:3|max:30|geo_num"
+        rules="required|min:3|max:30|alpha_geo"
         lang="ქარ"
       ></the-input>
 
@@ -172,7 +171,7 @@ const handleSubmit = async (data) => {
         :value="movie.discription.en"
         label="Discription"
         name="discription.en"
-        rules="required|min:3|max:30|alpha_num"
+        rules="required|min:3|max:30|alpha_latin"
         lang="Eng"
       ></the-input>
 
@@ -180,7 +179,7 @@ const handleSubmit = async (data) => {
         :value="movie.discription.ka"
         label="ფილმის აღწერა"
         name="discription.ka"
-        rules="required|min:3|max:30|geo_num"
+        rules="required|min:3|max:30|alpha_geo"
         lang="ქარ"
       ></the-input>
 

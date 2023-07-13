@@ -6,42 +6,15 @@ import { ref } from 'vue'
 
 import { Field, ErrorMessage } from 'vee-validate'
 const props = defineProps({
-  label: {
-    type: String,
-    required: false
-  },
-  placeholder: {
-    type: String,
-    required: false
-  },
-  name: {
-    type: String,
-    required: true
-  },
-  modelValue: {
-    type: [String, Boolean],
-    required: true
-  },
-  rules: {
-    type: String,
-    required: false
-  },
-  type: {
-    type: String,
-    required: false
-  },
-  errorsFromBack: {
-    type: [String, Object],
-    required: false
-  },
-  errors: {
-    type: Object,
-    required: false
-  },
-  valid: {
-    type: Boolean,
-    required: false
-  }
+  label: { type: String, required: false },
+  placeholder: { type: String, required: false },
+  name: { type: String, required: true },
+  modelValue: { type: [String, Boolean], required: true },
+  rules: { type: String, required: false },
+  type: { type: String, required: false },
+  errorsFromBack: { type: [String, Object], required: false },
+  errors: { type: Object, required: false },
+  valid: { type: Boolean, required: false }
 })
 
 const inputStyle = () => {

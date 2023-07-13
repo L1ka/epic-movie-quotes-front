@@ -88,7 +88,7 @@ const handleSubmit = async (data, { resetForm }) => {
   >
     <old-value-field
       v-if="user?.first_name"
-      title="Username"
+      :title="$t('profile.username')"
       name="first_name"
       id="input1"
       @show="showInput($event)"
@@ -103,13 +103,13 @@ const handleSubmit = async (data, { resetForm }) => {
       rules="required|min:3|max:15|alpha_num_lower"
       :errors="errors"
       :valid="meta.valid"
-      placeholder="Enter new usarname"
-      label="Username"
+      :placeholder="$t('profile.new_username')"
+      :label="$t('profile.username')"
     ></input-field>
 
     <old-value-field
       v-if="user?.email"
-      title="email"
+      :title="$t('profile.email')"
       name="email"
       id="input2"
       @show="showInput($event)"
@@ -124,15 +124,15 @@ const handleSubmit = async (data, { resetForm }) => {
       rules="required|email"
       :errors="errors"
       :valid="meta.valid"
-      placeholder="Enter new email"
-      label="Email"
+      :placeholder="$t('profile.enter_email')"
+      :label="$t('profile.email')"
     ></input-field>
 
     <old-value-field
       v-if="!user.google_id"
-      title="Password"
+      :title="$t('profile.password')"
       id="input3"
-      name="*******"
+      name="password"
       @show="showInput($event)"
     ></old-value-field>
 
@@ -146,8 +146,8 @@ const handleSubmit = async (data, { resetForm }) => {
       rules="required|min:8|max:15|alpha_num_lower"
       :errors="errors"
       :valid="meta.valid"
-      placeholder="Enter new password"
-      label="Password"
+      :placeholder="$t('profile.enter_password')"
+      :label="$t('profile.password')"
     ></password-field>
 
     <confirm-dialog

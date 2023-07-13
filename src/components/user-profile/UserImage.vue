@@ -32,7 +32,7 @@ const handleFileUpload = (event) => {
     ></div>
 
     <div class="flex flex-col w-48 h-8">
-      <label for="profile" class="text-center">Upload new photo</label>
+      <label for="profile" class="text-center text-white">{{ $t('profile.upload_image') }}</label>
       <input
         type="file"
         name="profile"

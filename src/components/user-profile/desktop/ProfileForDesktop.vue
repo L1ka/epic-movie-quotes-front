@@ -39,7 +39,6 @@ const reset = () => {
 
 const showInput = (e) => {
   if (!user.value.google_id || e !== 'input2') visibleInputs[e] = !visibleInputs[e]
-  console.log(visibleInputs[e])
 }
 const showSaveButton = computed(() => {
   return Object.values(visibleInputs).some((value) => value)
@@ -83,7 +82,7 @@ const handleSubmit = async (data, { resetForm }) => {
   <div class="hidden lg:flex flex-col lg:items-center min-h-screen w-screen text-white" v-if="user">
     <router-view></router-view>
 
-    <p class="hidden lg:block text-white">My profile</p>
+    <p class="hidden lg:block text-white">{{ $t('profile.profile') }}</p>
     <div
       class="bg-light-black relative lg:text-dark-gray lg:bg-black px-8 lg:px-24 2xl:px-40 flex flex-col items-center mt-6 lg:mt-32 w-full lg:w-[55%] h-screen lg:h-full lg:pb-44 mb-48"
     >
@@ -91,14 +90,14 @@ const handleSubmit = async (data, { resetForm }) => {
 
       <Form @submit="handleSubmit" class="w-full text-white" v-slot="{ errors, meta }">
         <old-value-field
-          title="Username"
+          :title="$t('profile.username')"
           name="first_name"
           id="input1"
           @show="showInput($event)"
         ></old-value-field>
 
         <div class="mb-6 input" id="1" v-if="visibleInputs.input1">
-          <p class="mb-2">New Username</p>
+          <p class="mb-2">{{ $t('profile.new_username') }}</p>
 
           <the-input
             v-model="form.first_name"
@@ -107,19 +106,19 @@ const handleSubmit = async (data, { resetForm }) => {
             :errors="errors"
             class="mb-[0] w-[750px] text-dark-gray"
             :valid="meta.valid"
-            placeholder="Enter new usarname"
+            :placeholder="$t('profile.enter_username')"
           ></the-input>
         </div>
 
         <old-value-field
-          title="Email"
+          :title="$t('profile.email')"
           id="input2"
           name="email"
           @show="showInput($event)"
         ></old-value-field>
 
         <div class="mb-6 input" id="2" v-if="visibleInputs.input2">
-          <p class="mb-2">New Email</p>
+          <p class="mb-2">{{ $t('profile.new_email') }}</p>
           <the-input
             v-model="form.email"
             name="email"
@@ -127,13 +126,13 @@ const handleSubmit = async (data, { resetForm }) => {
             :errors="errors"
             class="mb-[0] w-[750px] text-dark-gray"
             :valid="meta.valid"
-            placeholder="Enter new email"
+            :placeholder="$t('profile.enter_email')"
           ></the-input>
         </div>
 
         <old-value-field
           v-if="!user.google_id"
-          title="Password"
+          :title="$t('profile.password')"
           id="input3"
           name="password"
           @show="showInput($event)"
@@ -157,9 +156,9 @@ const handleSubmit = async (data, { resetForm }) => {
           class="flex items-center absolute right-0 bottom-[-150px] text-white"
           v-if="showSaveButton"
         >
-          <p class="mr-6" @click="reset()">Cancel</p>
+          <p class="mr-6" @click="reset()">{{ $t('profile.cancel') }}</p>
 
-          <button class="rounded-md p-4 bg-base-red">Save changes</button>
+          <button class="rounded-md p-4 bg-base-red">{{ $t('profile.save') }}</button>
         </div>
       </Form>
     </div>

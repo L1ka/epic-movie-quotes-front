@@ -28,7 +28,7 @@ const emit = defineEmits(['visible', 'edit'])
   >
     <icon-left-arrow class="ml-8 self-start mb-6" @click="$emit('visible')"></icon-left-arrow>
     <div class="bg-light-black w-full py-24 px-10">
-      <p class="mb-2">New {{ label }}</p>
+      <p class="mb-2">{{ $t('profile.new') }} {{ label }}</p>
 
       <the-input
         v-model="value"
@@ -42,8 +42,8 @@ const emit = defineEmits(['visible', 'edit'])
     </div>
 
     <div class="flex justify-between w-full px-10 mt-8">
-      <p @click="$emit('visible')">Cancel</p>
-      <p @click="$emit('edit')" class="bg-base-red px-5 py-2 rounded">Edit</p>
+      <p @click="$emit('visible')">{{ $t('profile.cancel') }}</p>
+      <p @click="$emit('edit')" class="bg-base-red px-5 py-2 rounded">{{ $t('profile.edit') }}</p>
     </div>
   </div>
 </template>

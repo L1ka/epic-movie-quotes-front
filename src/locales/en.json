@@ -37,7 +37,7 @@
   "email": {
     "thank_you": "Thank you!",
     "account_activated": "Your account has been activated.",
-    "check_email": "Please check your email and follow the instructions to </br> activate your account.",
+    "check_email": "Please check your email and follow the instructions to  activate your account.",
     "open_email": "Go to my email"
   },
   "expiration": {
@@ -59,5 +59,101 @@
     "reset_password": "Reset password",
     "success": "Success!",
     "changed_successfully": "Your Password changed successfully"
+  },
+  "my_movies": {
+    "title": "My list of movies",
+    "sum": "total",
+    "search": "search",
+    "add_movie": "Add movie"
+  },
+  "side_bar": {
+    "news_feed": "news feed",
+    "my_movies": "List of movies",
+    "edit_profile": "Edit your profile"
+  },
+  "logout": "Log out",
+  "quote": {
+    "new_quote": "Write new quote",
+    "placeholder": "Search by",
+    "placeholder_focused": "Enter { '@' } to search movies, Enter # to search quotes ",
+    "movie": "movie",
+    "add_comment": "Write a comment",
+    "add_quote": "Add quote",
+    "quotes": "Quotes",
+    "view_quote": "view quote",
+    "edit": "Edit",
+    "delete": "Delete",
+    "all_quotes": "All Quotes",
+    "sum": "Total"
+  },
+  "movie": {
+    "description": "Movie description",
+    "delete_movie": "Want to delete movie",
+    "cancel": "cancel",
+    "yes": "yes",
+    "director": "DIRECTOR"
+  },
+  "update_email": {
+    "check_email": "Please check your email and follow the instructions to update your email."
+  },
+  "add_movie": {
+    "required": "this field is required",
+    "header": "Add Movie",
+    "save": "Add movie",
+    "upload_image": "Upload image"
+  },
+  "edit_movie": {
+    "header": "Edit movie",
+    "save": "Edit Movie",
+    "drop_image": "Drag & drop your image here or",
+    "replace_photo": "Replace photo",
+    "choose_file": "Choose file"
+  },
+  "edit_quote": {
+    "header": "Edit quote",
+    "delete": "delete",
+    "save": "Save Changes",
+    "change_photo": "Change photo",
+    "delete_quote": "Want to delete quote"
+  },
+  "add_quote": {
+    "header": "Add quote",
+    "save": "Add quote",
+    "add_new_quote": "write new quote",
+    "post": "Post"
+  },
+
+  "view_quote": {
+    "header": "View Quote"
+  },
+  "profile": {
+    "profile": "My profile",
+    "upload_image": "Upload new photo",
+    "new_username": "New Username",
+    "new_email": "New Email",
+    "new_password": "New Password",
+    "confirm_password": "Confirm New password",
+    "enter_password": "Enter new password",
+    "enter_email": "Enter new email",
+    "enter_username": "Enter new usarname",
+    "repeat_password": "Repeat password",
+    "cancel": "Cancel",
+    "save": "Save changes",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "edit": "Edit",
+    "password_info": "Passwords should contain:",
+    "password_size": "8 or more characters",
+    "text_style": "15 lowercase character",
+    "new": "New",
+    "confirm": "Confirm",
+    "make_changes?": "Are you sure to make changes ?"
+  },
+  "notifications": {
+    "notifications": "Notifications",
+    "commented": "Commented to your quote..",
+    "reacted": "Reacted to your quote",
+    "mark_all": "Mark as all read"
   }
 }

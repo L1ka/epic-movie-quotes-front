@@ -76,7 +76,7 @@ const handleSubmit = async (data) => {
       <the-input
         placeholder="Movie name"
         name="title.en"
-        rules="required|min:3|max:30|alpha_num"
+        rules="required|min:3|max:30|alpha_latin"
         lang="Eng"
         :errorsFromBack="errorsFromBack"
       ></the-input>
@@ -84,7 +84,7 @@ const handleSubmit = async (data) => {
       <the-input
         placeholder="ფილმის სახელი"
         name="title.ka"
-        rules="required|min:3|max:30|geo_num"
+        rules="required|min:3|max:30|alpha_geo"
         lang="ქარ"
         :errorsFromBack="errorsFromBack"
       ></the-input>

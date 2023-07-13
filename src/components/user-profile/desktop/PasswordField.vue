@@ -17,7 +17,7 @@ const confirmValue = ref(props.confirmValue)
   <div class="mb-6 input">
     <validation-information></validation-information>
 
-    <p class="mb-2">New Password</p>
+    <p class="mb-2">{{ $t('profile.new_password') }}</p>
     <the-input
       v-model="value"
       name="password"
@@ -26,10 +26,10 @@ const confirmValue = ref(props.confirmValue)
       class="mb-6 w-[750px] text-dark-gray"
       :valid="valid"
       type="password"
-      placeholder="Enter new password"
+      :placeholder="$t('profile.enter_password')"
     ></the-input>
 
-    <p class="mb-2">Confirm New password</p>
+    <p class="mb-2">{{ $t('profile.confirm_password') }}</p>
     <the-input
       v-model="confirmValue"
       name="confirm_password"
@@ -38,7 +38,7 @@ const confirmValue = ref(props.confirmValue)
       class="mb-[0] w-[750px] text-dark-gray"
       :valid="valid"
       type="password"
-      placeholder="Repeat password"
+      :placeholder="$t('profile.repeat_password')"
     ></the-input>
   </div>
 </template>

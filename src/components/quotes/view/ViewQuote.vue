@@ -28,7 +28,7 @@ const showComents = (e) => {
 onClickOutside(modal, close)
 
 const getQuotes = async () => {
-  await axiosInstance.post('/api/get-quote', { id: route.params.quoteId }).then((res) => {
+  await axiosInstance.get(`/api/get-quote/${route.params.quoteId}`).then((res) => {
     quotes.value = res.data.data
   })
 }
@@ -51,11 +51,21 @@ onMounted(() => {
 
       <quote-info :quote="quotes"></quote-info>
 
-      <add-like :quote="quotes" @show="showComents($event)" class="px-8"></add-like>
+      <add-like
+        :quote="quotes"
+        @show="showComents($event)"
+        @update="getQuotes()"
+        class="px-8"
+      ></add-like>
 
       <the-comment :quote="quotes" v-model="showAllItems"></the-comment>
 
-      <add-comment :quoteId="quotes.id" :movieId="quotes.movie.id" class="px-8"></add-comment>
+      <add-comment
+        :quoteId="quotes.id"
+        :movieId="quotes.movie.id"
+        @update="getQuotes()"
+        class="px-8"
+      ></add-comment>
     </div>
   </div>
 </template>
