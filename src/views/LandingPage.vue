@@ -1,12 +1,21 @@
 <script setup>
 import TheButton from '@/components/ui/TheButton.vue'
 import SetLocale from '@/components/ui/SetLocale.vue'
-import { RouterView } from 'vue-router'
+import { RouterView, useRouter } from 'vue-router'
 import ScrollAnimation from '@/components/landing/ScrollAnimation.vue'
+import { computed } from 'vue'
+
+const router = useRouter()
+
+const modal = computed(() => {
+  return router.currentRoute.value.name !== 'landing'
+    ? ' fixed top-0 left-0  right-0  bottom-0 bg-[#191525]'
+    : ''
+})
 </script>
 
 <template>
-  <div>
+  <div :class="modal">
     <div>
       <div class="h-screen px-2 md:px-12 lg:px-[70px] pt-[30px]">
         <router-view></router-view>

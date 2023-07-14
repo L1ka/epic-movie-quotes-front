@@ -6,7 +6,7 @@ import SearchBar from '@/components/news-feed/SearchBar.vue'
 import SearchForMobile from '@/components/news-feed/SearchForMobile.vue'
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 import axiosInstance from '@/config/axios/index.js'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 const quotes = reactive({ quotes: [] })
 const currentPage2 = ref(1)
@@ -16,6 +16,7 @@ const searchValue = ref('')
 const router = useRouter()
 const focused = ref(false)
 const open = ref(false)
+const route = useRoute()
 
 const width = computed(() => {
   return focused.value ? 'w-[30%]' : 'w-[70%]'
@@ -36,14 +37,22 @@ const modal = computed(() => {
     : 'static'
 })
 
-const updateQuotes = () => {
-  handleSearch()
-}
+// const updateQuotes = () => {
+//   console.log('yes')
+//   handleSearch()
+// }
 
 watch(searchValue, () => {
   currentPage2.value = 1
   lastPage.value = null
 })
+
+watch(
+  () => route.params,
+  () => {
+    handleSearch()
+  }
+)
 
 const handleSearch = async (value) => {
   open.value = false
@@ -111,7 +120,7 @@ onMounted(() => {
 
     <div class="lg:w-[70%] xl:w-[55%]">
       <div class="flex justify-between w-full mt-8 mb-6 px-2">
-        <create-quote @update="updateQuotes" :width="width"></create-quote>
+        <create-quote :width="width"></create-quote>
         <search-bar
           class="hidden lg:flex ml-2"
           v-model="searchValue"

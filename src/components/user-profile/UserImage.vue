@@ -18,7 +18,7 @@ const handleFileUpload = (event) => {
       }
     })
     .then((response) => {
-      user.value = 'http://localhost:8000' + response.data.image
+      user.value = backUrl + response.data.image
       getUser()
     })
 }

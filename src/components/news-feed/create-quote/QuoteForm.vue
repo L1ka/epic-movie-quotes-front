@@ -18,7 +18,6 @@ const router = useRouter()
 const movieId = ref(null)
 const image = ref(null)
 const modal = ref(null)
-const emit = defineEmits(['update', 'close-modal'])
 
 const selectMovie = (id) => {
   movieId.value = id
@@ -26,12 +25,10 @@ const selectMovie = (id) => {
 
 const onDrop = (e) => {
   e.preventDefault()
-  console.log(e.dataTransfer.files[0].name)
   image.value = e.dataTransfer.files[0]
 }
 
 const closeModal = () => {
-  emit('close-modal')
   router.push({ name: 'news-feed' })
 }
 
@@ -50,8 +47,7 @@ const handleSubmit = async (data) => {
       }
     }
   )
-  //provide('update', true)
-  emit('update')
+
   closeModal()
 }
 
