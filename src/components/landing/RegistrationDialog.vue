@@ -30,12 +30,12 @@ const redirectToProvider = async () => {
 <template>
   <div
     v-if="open"
-    class="fixed top-0 left-0 bottom-0 right-0 backdrop-blur-sm bg-black/30 z-10 overflow-hidden"
+    class="fixed top-0 left-0 bottom-0 right-0 z-50 backdrop-blur-sm bg-black/30 z-10 overflow-hidden"
   ></div>
   <div
     v-if="open"
     ref="modal"
-    class="pt-16 min-w-full min-h-full md:min-w-[50%] lg:min-w-[40%] 2xl:min-w-[35%] md:min-h-fit absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-20 bg-light-gray rounded-lg flex justify-center"
+    class="pt-16 min-w-full min-h-full md:min-w-[50%] lg:min-w-[40%] 2xl:min-w-[35%] md:min-h-fit absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-50 bg-light-gray rounded-lg flex justify-center"
   >
     <div class="flex flex-col items-center w-[90%] md:w-[80%] sm:w-[70%]">
       <h1 class="text-white mb-3 text-sm-bold md:text-m">

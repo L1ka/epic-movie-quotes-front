@@ -20,13 +20,13 @@ function redirectToEmail() {
 <template>
   <div
     v-if="open"
-    class="fixed top-0 left-0 bottom-0 right-0 backdrop-blur-sm bg-black sm:bg-black/30"
+    class="fixed top-0 left-0 bottom-0 right-0 z-50 backdrop-blur-sm bg-black sm:bg-black/30"
   ></div>
   <div
     v-if="open"
     id="pop-up"
     ref="modal"
-    class="pt-6 sm:pt-16 w-[80%] h-[50%] sm:w-[60%] lg:w-[40%] 2xl:w-[30%] sm:h-fit absolute top-[35%] sm:top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-20 bg-light-gray rounded-lg flex justify-center"
+    class="pt-6 sm:pt-16 w-[80%] h-[50%] sm:w-[60%] lg:w-[40%] 2xl:w-[30%] sm:h-fit absolute top-[35%] sm:top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-50 bg-light-gray rounded-lg flex justify-center"
   >
     <div class="flex flex-col items-center text-white w-[90%]">
       <icon-email class="mb-[20px]"></icon-email>
