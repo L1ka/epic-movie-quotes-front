@@ -33,20 +33,20 @@ const emit = defineEmits(['visible', 'edit'])
     <div class="bg-light-black w-full py-24 px-10">
       <validation-information></validation-information>
 
-      <p class="mb-2">New {{ label }}</p>
+      <p class="mb-2">{{ $t('profile.new') }} {{ label }}</p>
 
       <the-input
         v-model="value"
         :name="name"
         :rules="rules"
         :errors="errors"
-        class="mb-[0] text-dark-gray"
+        class="text-dark-gray"
         :valid="valid"
         :placeholder="placeholder"
         type="password"
       ></the-input>
 
-      <p class="mb-2">Confirm New password</p>
+      <p class="mb-2">{{ $t('profile.confirm_password') }}</p>
       <the-input
         v-model="confirmValue"
         name="confirm_password"
@@ -55,13 +55,13 @@ const emit = defineEmits(['visible', 'edit'])
         class="mb-[0] w-[750px] text-dark-gray"
         :valid="valid"
         type="password"
-        placeholder="Repeat password"
+        :placeholder="$t('profile.repeat_password')"
       ></the-input>
     </div>
 
     <div class="flex justify-between w-full px-10 mt-8">
-      <p @click="$emit('visible')">Cancel</p>
-      <p @click="$emit('edit')" class="bg-base-red px-5 py-2 rounded">Edit</p>
+      <p @click="$emit('visible')">{{ $t('profile.cancel') }}</p>
+      <p @click="$emit('edit')" class="bg-base-red px-5 py-2 rounded">{{ $t('profile.edit') }}</p>
     </div>
   </div>
 </template>

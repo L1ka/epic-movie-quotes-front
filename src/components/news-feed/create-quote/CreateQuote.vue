@@ -1,22 +1,16 @@
 <script setup>
 import IconPencil from '@/components/icons/IconPencil.vue'
-import QuoteForm from '@/components/news-feed/create-quote/QuoteForm.vue'
-import { ref } from 'vue'
 
-const open = ref(false)
-const emit = defineEmits(['update'])
-const updateQuotes = () => {
-  emit('update')
-}
+const props = defineProps({ width: { type: String, required: true } })
 </script>
 
 <template>
-  <div
-    class="flex text-white lg:bg-light-black lg:w-[70%] lg:mr-4 px-6 py-4 rounded-md"
-    @click="open = !open"
+  <router-link
+    :to="{ name: 'news-feed-quote' }"
+    class="flex text-white lg:bg-light-black px-6 py-4 rounded-md"
+    :class="width"
   >
     <icon-pencil class="mr-4"></icon-pencil>
     <p class="text-sm">{{ $t('quote.new_quote') }}</p>
-  </div>
-  <quote-form v-if="open" @update="updateQuotes"></quote-form>
+  </router-link>
 </template>

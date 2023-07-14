@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LandingPage from '@/views/LandingPage.vue'
-import Cookies from 'js-cookie'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -71,16 +70,6 @@ const router = createRouter({
       path: '/account',
       name: 'account',
       component: () => import('@/views/AccountPage.vue'),
-      beforeEnter: (to, from, next) => {
-        const isAuthorized =
-          (Cookies.get('XSRF-TOKEN') || Cookies.get('laravel_session')) !== undefined &&
-          localStorage.getItem('authorized')
-        if (isAuthorized) {
-          next()
-        } else {
-          next({ name: 'access-forbidden' })
-        }
-      },
       redirect: { path: '/news-feed' },
       children: [
         {
