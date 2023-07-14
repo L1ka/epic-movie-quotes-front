@@ -5,26 +5,31 @@ import EditOrDeleteMovie from '@/components/movie-description/movie-card/EditOrD
 import MovieGenres from '@/components/movie-description/movie-card/MovieGenres.vue'
 import QuoteSum from '@/components/movie-description/movie-card/QuoteSum.vue'
 import axiosInstance from '@/config/axios/index.js'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useLocaleStore } from '@/store/locale.js'
 import { storeToRefs } from 'pinia'
+import { useRoute } from 'vue-router'
 
 const { selectedLocale } = storeToRefs(useLocaleStore())
 
 const props = defineProps({ id: { type: String } })
-
+const route = useRoute()
 const backUrl = import.meta.env.VITE_API_BASE_URL
 const movie = ref(null)
 
 const getMovie = async () => {
   await axiosInstance.get(`/api/get-movie/${props.id}`).then((res) => {
-    movie.value = res.data.data
+    movie.value = { ...res.data.data }
   })
 }
 
-const getQuoteSum = () => {
-  getMovie()
-}
+watch(
+  () => route.params,
+  () => {
+    console.log('yep')
+    getMovie()
+  }
+)
 
 onMounted(() => {
   getMovie()
@@ -73,10 +78,10 @@ onMounted(() => {
           </div>
         </div>
 
-        <quote-sum :length="movie.quotes.length" @update="getMovie()"></quote-sum>
+        <quote-sum :length="movie.quotes.length"></quote-sum>
       </div>
     </div>
-    <all-quotes :id="movie.id" @update="getQuoteSum"></all-quotes>
+    <all-quotes :id="movie.id" @update="getMovie()"></all-quotes>
     <router-view></router-view>
   </div>
 </template>
