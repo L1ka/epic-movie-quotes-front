@@ -26,10 +26,23 @@ const handleFileUpload = (event) => {
 
 <template>
   <div class="mb-24 mt-6 lg:mt-[-10%] flex flex-col items-center">
-    <div
+    <!-- <div
+      style="background-image: url('@/assets/images/default-image.png')"
       :style="{ 'background-image': 'url( ' + backUrl + user?.image + ')' }"
       class="lg:w-44 lg:h-44 w-36 h-36 bg-cover bg-no-repeat bg-center rounded-full mb-2"
+    ></div> -->
+
+    <div
+      v-if="user?.image"
+      :style="{ 'background-image': 'url(' + backUrl + user.image + ')' }"
+      class="lg:w-44 lg:h-44 w-36 h-36 bg-cover bg-no-repeat bg-center rounded-full mb-2"
     ></div>
+    <img
+      v-else
+      src="@/assets/images/default-image.png"
+      alt="user-image"
+      class="lg:w-44 lg:h-44 w-36 h-36 bg-cover bg-no-repeat bg-center rounded-full mb-2"
+    />
 
     <div class="flex flex-col w-48 h-8">
       <label for="profile" class="text-center text-white">{{ $t('profile.upload_image') }}</label>

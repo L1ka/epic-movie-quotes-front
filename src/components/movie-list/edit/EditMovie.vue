@@ -30,17 +30,14 @@ onClickOutside(modal, () => {
 })
 
 onMounted(async () => {
-  await axiosInstance
-    .get(`api/get-movie/${id}`)
-    .then((res) => {
-      console.log(res)
-      movie.value = res.data.data
+  await axiosInstance.get(`api/get-movie/${id}`).then((res) => {
+    console.log(res)
+    movie.value = res.data.data
 
-      res.data.data.genres.forEach((el) => {
-        value.value.push(el.id)
-      })
+    res.data.data.genres.forEach((el) => {
+      value.value.push(el.id)
     })
-    .catch((err) => console.log(err))
+  })
 })
 
 const uploadImage = (file) => {
@@ -59,7 +56,6 @@ const uploadImage = (file) => {
 }
 
 const handleFileUpload = (event) => {
-  console.log(event.target.files[0])
   const file = event.target.files[0]
 
   uploadImage(file)

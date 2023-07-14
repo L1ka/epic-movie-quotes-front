@@ -15,7 +15,7 @@ const emit = defineEmits(['update', 'open-notification'])
 
 const openNotification = async (quoteId, movieId, notificationId) => {
   await axiosInstance.post('/api/notification-seen', { id: notificationId })
-  router.push({ name: 'movie-description', params: { movieId: movieId, quoteId: quoteId } })
+  router.push({ name: 'view-quote', params: { id: movieId, quoteId: quoteId } })
   notifications.value.forEach((el) => {
     if (el.id == notificationId) {
       el.seen = 1

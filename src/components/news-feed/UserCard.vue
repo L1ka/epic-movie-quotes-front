@@ -19,10 +19,18 @@ const hasBorder = computed(() => {
 <template>
   <div class="flex items-center mb-4 mt-8" v-if="user">
     <div
+      v-if="user?.image"
       :style="{ 'background-image': 'url(' + backUrl + user.image + ')' }"
       class="w-14 h-14 mr-4 bg-cover bg-no-repeat bg-center rounded-full mb-2"
       :class="hasBorder"
     ></div>
+    <img
+      v-else
+      src="@/assets/images/default-image.png"
+      alt="user-image"
+      class="w-14 h-14 mr-4 bg-cover bg-no-repeat bg-center rounded-full mb-2"
+      :class="hasBorder"
+    />
     <div>
       <p class="text-white text-sm lg:text-sm-bold capitalize mb-3">
         {{ user.first_name }}
