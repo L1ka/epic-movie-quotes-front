@@ -30,11 +30,14 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div v-if="open" class="fixed top-0 left-0 bottom-0 right-0 backdrop-blur-sm bg-black/30"></div>
+  <div
+    v-if="open"
+    class="fixed top-0 left-0 bottom-0 right-0 z-50 backdrop-blur-sm bg-black/30"
+  ></div>
   <div
     v-if="open"
     ref="modal"
-    class="min-w-full min-h-full sm:min-w-[60%] lg:min-w-[40%] 2xl:min-w-[20%] sm:min-h-fit pt-16 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-20 bg-light-gray rounded-lg flex justify-center"
+    class="min-w-full min-h-full sm:min-w-[60%] lg:min-w-[40%] 2xl:min-w-[20%] sm:min-h-fit pt-16 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-50 bg-light-gray rounded-lg flex justify-center"
   >
     <Form
       @submit="handleSubmit"

@@ -1,6 +1,7 @@
 <script setup>
 import IconHouse from '@/components/icons/IconHouse.vue'
 import IconCamera from '@/components/icons/IconCamera.vue'
+import UserCard from '@/components/ui/UserCard.vue'
 import SetLocale from '@/components/ui/SetLocale.vue'
 import axiosInstance from '@/config/axios/index.js'
 import { useRoute, useRouter } from 'vue-router'
@@ -11,7 +12,6 @@ import { useUserStore } from '@/store/getUser.js'
 const route = useRoute()
 const router = useRouter()
 const { user } = storeToRefs(useUserStore())
-const backUrl = import.meta.env.VITE_API_BASE_URL
 
 const logout = async () => {
   await axiosInstance.post('api/logout').then(() => {
@@ -38,11 +38,8 @@ const hasBorder = computed(() => {
     class="px-12 py-6 md:px-7 fixed z-10 top-0 left-0 right-[10%] lg:top-24 lg:right-[80%] lg:bg-transparent text-white bg-black"
   >
     <router-link :to="{ name: 'profile' }" class="flex items-center mb-10 pt-8">
-      <div
-        :style="{ 'background-image': 'url(' + backUrl + user.image + ')' }"
-        class="w-14 h-14 mr-4 bg-cover bg-no-repeat bg-center rounded-full mb-2"
-        :class="hasBorder"
-      ></div>
+      <user-card class="mb-0 mt-0" :hasBorder="hasBorder" type="sidebar"> </user-card>
+
       <div class="flex flex-col lg:text-xs xl:text-sm">
         <p class="text-white text-sm lg:text-sm capitalize">{{ user.first_name }}</p>
         <p class="text-xs text-gray">{{ $t('side_bar.edit_profile') }}</p>

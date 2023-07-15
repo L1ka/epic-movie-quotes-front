@@ -44,7 +44,7 @@ onMounted(() => {
     v-if="show && quotes"
   >
     <div
-      class="text-white bg-black w-full lg:w-[60%] overflow-y-scroll max-h-[1000px] lg:mt-24 absolute z-50"
+      class="text-white bg-black w-full lg:w-[60%] max-h-[1000px] overflow-y-scroll lg:mt-24 lg:mb-20"
       ref="modal"
     >
       <view-quote-header @close="close" :quote="quotes"></view-quote-header>

@@ -15,7 +15,7 @@ export default function instantiatePusher() {
         authorize: (socketId, callback) => {
           axios
             .post(
-              'http://localhost:8000/broadcasting/auth',
+              `${import.meta.env.VITE_API_BASE_URL}/broadcasting/auth`,
               {
                 socket_id: socketId,
                 channel_name: channel.name

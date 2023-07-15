@@ -37,10 +37,6 @@ const modal = computed(() => {
     : 'static'
 })
 
-// const updateQuotes = () => {
-//   console.log('yes')
-//   handleSearch()
-// }
 
 watch(searchValue, () => {
   currentPage2.value = 1

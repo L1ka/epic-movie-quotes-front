@@ -27,7 +27,6 @@ const toggleHiddenDiv = (i) => {
 }
 
 const deleteQuote = async (id, index) => {
-  console.log(id)
   await axiosInstance.delete(`/api/quote/delete/${id}`)
 
   show.value = false

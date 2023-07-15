@@ -27,7 +27,6 @@ const props = defineProps({
 
 const getNotifications = async () => [
   await axiosInstance.get(`/api/get-notifications`).then((res) => {
-    console.log(res.data.data)
     notificationsArr.value = res.data.data
     length.value = res.data.data.filter((el) => {
       return el.seen === 0

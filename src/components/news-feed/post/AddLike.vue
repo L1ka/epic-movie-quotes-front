@@ -7,7 +7,7 @@ import { useUserStore } from '@/store/getUser.js'
 import { ref } from 'vue'
 
 const { user } = storeToRefs(useUserStore())
-const emit = defineEmits(['update'])
+const emit = defineEmits(['update', 'show'])
 
 const props = defineProps({
   quote: { type: Object, required: true }

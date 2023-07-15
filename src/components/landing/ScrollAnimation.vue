@@ -19,11 +19,11 @@ onUnmounted(() => {
   <div ref="container">
     <div class="h-screen w-screen">
       <div>
-        <div
+        <img
+          src="@/assets/images/image1.png"
           ref="firstImageRef"
           class="first h-full w-full bg-cover bg-no-repeat bg-center"
-          style="background-image: url('src/assets/images/image1.png')"
-        ></div>
+        />
 
         <div class="absolute text-white top-[135%] md:w-[50%] w-[85%] md:ml-36 ml-12 flex z-10">
           <div class="w-12 lg:w-28 h-0.5 lg:h-1 bg-white mt-4 lg:mt-8 mr-2"></div>
@@ -36,11 +36,11 @@ onUnmounted(() => {
         </div>
       </div>
       <div>
-        <div
+        <img
+          src="@/assets/images/image2.png"
           ref="secondImageRef"
           class="second h-full w-full bg-cover bg-no-repeat bg-left"
-          style="background-image: url('src/assets/images/image2.png')"
-        ></div>
+        />
 
         <div class="absolute text-white top-[235%] md:w-[50%] w-[85%] md:ml-36 ml-12 z-10 flex">
           <div class="w-12 lg:w-28 h-0.5 lg:h-1 bg-white mt-4 lg:mt-8 mr-2"></div>
@@ -55,11 +55,11 @@ onUnmounted(() => {
         </div>
       </div>
       <div>
-        <div
+        <img
+          src="@/assets/images/image3.png"
           ref="thirdImageRef"
           class="third h-full w-full bg-cover bg-no-repeat bg-center"
-          style="background-image: url('src/assets/images/image3.png')"
-        ></div>
+        />
 
         <div class="absolute text-white top-[335%] z-10 md:w-[50%] w-[85%] md:ml-36 ml-12 flex">
           <div class="w-12 lg:w-28 h-0.5 lg:h-1 bg-white mt-4 lg:mt-8 mr-2"></div>
