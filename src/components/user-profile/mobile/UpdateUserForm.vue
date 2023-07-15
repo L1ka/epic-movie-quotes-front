@@ -80,12 +80,7 @@ const handleSubmit = async (data, { resetForm }) => {
 </script>
 
 <template>
-  <Form
-    @submit="handleSubmit"
-    class="w-full text-white"
-    v-slot="{ errors, meta }"
-    v-if="user.image"
-  >
+  <Form @submit="handleSubmit" class="w-full text-white" v-slot="{ errors, meta }" v-if="user">
     <old-value-field
       v-if="user?.first_name"
       :title="$t('profile.username')"

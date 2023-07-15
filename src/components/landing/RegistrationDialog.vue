@@ -1,5 +1,6 @@
 <script setup>
 import RegistrationForm from '@/components/landing/RegistrationForm.vue'
+import IconExit from '@/components/icons/IconExit.vue'
 import IconGoogle from '@/components/icons/IconGoogle.vue'
 import { onClickOutside } from '@vueuse/core'
 import axiosInstance from '@/config/axios/index.js'
@@ -11,9 +12,13 @@ const route = useRouter()
 const open = ref(true)
 
 onClickOutside(modal, () => {
+  close()
+})
+
+const close = () => {
   route.push({ name: 'landing' })
   open.value = false
-})
+}
 
 const redirectToProvider = async () => {
   await axiosInstance
@@ -30,7 +35,7 @@ const redirectToProvider = async () => {
 <template>
   <div
     v-if="open"
-    class="fixed top-0 left-0 bottom-0 right-0 z-50 backdrop-blur-sm bg-black/30 z-10 overflow-hidden"
+    class="fixed top-0 left-0 bottom-0 right-0 z-50 backdrop-blur-sm bg-black/30 overflow-hidden"
   ></div>
   <div
     v-if="open"
@@ -38,6 +43,7 @@ const redirectToProvider = async () => {
     class="pt-16 min-w-full min-h-full md:min-w-[50%] lg:min-w-[40%] 2xl:min-w-[35%] md:min-h-fit absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-50 bg-light-gray rounded-lg flex justify-center"
   >
     <div class="flex flex-col items-center w-[90%] md:w-[80%] sm:w-[70%]">
+      <icon-exit class="self-end md:hidden" @click="close()"></icon-exit>>
       <h1 class="text-white mb-3 text-sm-bold md:text-m">
         {{ $t('registration.create_an_account') }}
       </h1>
