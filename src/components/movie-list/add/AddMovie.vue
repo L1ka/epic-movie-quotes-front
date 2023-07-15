@@ -40,7 +40,7 @@ const handleSubmit = async (data) => {
   if (!SelectedValue.value.length) return
   await axiosInstance
     .post(
-      'api/movie/create',
+      '/api/movie/create',
       {
         ...data,
         ...{ image: image.value ? image.value : data.image },
