@@ -43,7 +43,7 @@ onMounted(() => {
         <div class="flex flex-col md:flex-row w-full">
           <div
             :style="{ 'background-image': 'url( ' + backUrl + movie.image + ')' }"
-            class="md:w-[55%] w-full h-52 rounded-md md:mr-8 bg-cover bg-center"
+            class="md:w-[45%] w-full h-72 rounded-md md:mr-8 bg-cover bg-center"
           ></div>
 
           <div class="flex flex-col mt-6 md:mt-0 md:w-[45%]">
