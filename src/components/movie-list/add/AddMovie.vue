@@ -66,7 +66,7 @@ const handleSubmit = async (data) => {
     <Form
       v-if="show && options"
       ref="modal"
-      class="w-full lg:w-[60%] flex flex-col items-center px-7 bg-black text-white z-50 overflow-y-scroll max-h-[1000px] lg:mt-28"
+      class="w-full lg:w-[60%] flex flex-col items-center px-7 bg-modal-black text-white z-50 overflow-y-scroll max-h-[1000px] lg:mt-28"
       @submit="handleSubmit"
     >
       <add-movie-header></add-movie-header>

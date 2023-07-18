@@ -62,7 +62,7 @@ onMounted(() => {
     </div>
 
     <div
-      class="bg-black p-8 md:pt-0 mb-10 relative rounded-md"
+      class="bg-modal-black p-8 md:pt-0 mb-10 relative rounded-md"
       v-for="(quote, index) in quotes"
       :key="index"
     >

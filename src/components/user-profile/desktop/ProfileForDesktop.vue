@@ -84,7 +84,7 @@ const handleSubmit = async (data, { resetForm }) => {
 
     <p class="hidden lg:block text-white">{{ $t('profile.profile') }}</p>
     <div
-      class="bg-light-black relative lg:text-dark-gray lg:bg-black px-8 lg:px-24 2xl:px-40 flex flex-col items-center mt-6 lg:mt-32 w-full lg:w-[55%] h-screen lg:h-full lg:pb-44 mb-48"
+      class="bg-light-black relative lg:text-dark-gray lg:bg-modal-black px-8 lg:px-24 2xl:px-40 flex flex-col items-center mt-6 lg:mt-32 w-full lg:w-[55%] h-screen lg:h-full lg:pb-44 mb-48"
     >
       <user-image></user-image>
 

@@ -37,7 +37,7 @@ onMounted(() => {
     v-if="show && quote"
   >
     <div
-      class="text-white z-50 bg-black lg:mt-24 lg:w-[60%] overflow-y-scroll max-h-[1000px]"
+      class="text-white z-50 bg-modal-black lg:mt-24 lg:w-[60%] overflow-y-scroll max-h-[1000px]"
       ref="modal"
       v-if="quote && show"
     >

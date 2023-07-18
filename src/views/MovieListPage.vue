@@ -34,7 +34,7 @@ watch(
 const modal = computed(() => {
   return router.currentRoute.value.name == 'add-movie' ||
     router.currentRoute.value.name == 'edit-movie'
-    ? ' fixed top-0 left-0  right-0  bottom-0 bg-[#191525]'
+    ? ' fixed top-0 left-0  right-0  bottom-0'
     : ''
 })
 
