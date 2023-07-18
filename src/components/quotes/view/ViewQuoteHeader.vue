@@ -12,7 +12,7 @@ const props = defineProps({ quote: { type: Object, required: true } })
 const emit = defineEmits(['close'])
 
 const deleteQuote = async () => {
-  await axiosInstance.delete(`/api/quote/delete/${props.quote.id}`)
+  await axiosInstance.delete(`/api/quote/${props.quote.id}`)
   emit('close')
 }
 </script>

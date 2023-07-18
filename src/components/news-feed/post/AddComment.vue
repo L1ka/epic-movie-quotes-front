@@ -18,7 +18,7 @@ const props = defineProps({
 
 const handleSubmit = async (event, id) => {
   comment.value = ''
-  await axiosInstance.post('/api/create-comment', {
+  await axiosInstance.post('/api/comment', {
     body: event.target.value,
     user_id: user.value.id,
     quote_id: id,

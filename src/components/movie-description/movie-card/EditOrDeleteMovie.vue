@@ -15,7 +15,7 @@ const props = defineProps({
 
 const deleteMovie = async () => {
   showConfirmation.value = false
-  await axiosInstance.delete(`/api/movie/delete/${props.movieId}`)
+  await axiosInstance.delete(`/api/movie/${props.movieId}`)
 
   route.push({ name: 'movie-list' })
 }

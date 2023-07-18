@@ -28,7 +28,7 @@ const showComents = (e) => {
 onClickOutside(modal, close)
 
 const getQuotes = async () => {
-  await axiosInstance.get(`/api/get-quote/${route.params.quoteId}`).then((res) => {
+  await axiosInstance.get(`/api/quote/${route.params.quoteId}`).then((res) => {
     quotes.value = res.data.data
   })
 }

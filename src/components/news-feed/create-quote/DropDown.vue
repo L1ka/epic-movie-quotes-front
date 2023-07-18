@@ -14,7 +14,7 @@ const myMovies = ref([])
 const emit = defineEmits(['select'])
 
 const getMovies = async () => {
-  await axiosInstance.get('/api/get-movies').then((res) => {
+  await axiosInstance.get('/api/movies').then((res) => {
     console.log(res)
     myMovies.value = res.data.data
   })

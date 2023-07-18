@@ -27,7 +27,7 @@ const toggleHiddenDiv = (i) => {
 }
 
 const deleteQuote = async (id, index) => {
-  await axiosInstance.delete(`/api/quote/delete/${id}`)
+  await axiosInstance.delete(`/api/quote/${id}`)
 
   show.value = false
   document.getElementById('index-' + index).style.display = 'none'
@@ -36,7 +36,8 @@ const deleteQuote = async (id, index) => {
 }
 
 const getQuotes = async () => {
-  await axiosInstance.get(`/api/get-quotes/${props.id}`).then((res) => {
+  await axiosInstance.get(`/api/quotes/${props.id}`).then((res) => {
+    console.log(res.data.data)
     quotes.value = res.data.data
   })
 }
@@ -44,7 +45,7 @@ const getQuotes = async () => {
 watch(
   () => route.params,
   () => {
-    getQuotes()
+    if (route.name == 'movie-description') getQuotes()
   }
 )
 

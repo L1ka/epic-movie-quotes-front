@@ -21,7 +21,7 @@ const close = () => {
 onClickOutside(modal, close)
 
 const getQuote = async () => {
-  await axiosInstance.get(`/api/get-quote/${route.params.quoteId}`).then((res) => {
+  await axiosInstance.get(`/api/quote/${route.params.quoteId}`).then((res) => {
     quote.value = res.data.data
   })
 }

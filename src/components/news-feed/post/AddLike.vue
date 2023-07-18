@@ -21,7 +21,7 @@ const show = () => {
 }
 
 const addLikes = async (id) => {
-  await axiosInstance.post('/api/create-like', {
+  await axiosInstance.post('/api/like', {
     user_id: user.value.id,
     quote_id: id,
     movie_id: props.quote.movie.id

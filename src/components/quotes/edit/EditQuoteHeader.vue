@@ -18,7 +18,7 @@ const close = () => {
 }
 
 const deleteQuote = async () => {
-  await axiosInstance.delete(`/api/quote/delete/${props.quoteId}`)
+  await axiosInstance.delete(`/api/quote/${props.quoteId}`)
   close()
 }
 </script>

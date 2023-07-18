@@ -12,7 +12,7 @@ const route = useRoute()
 const router = useRouter()
 
 const getMovies = async () => {
-  await axiosInstance.get('/api/get-movies').then((res) => {
+  await axiosInstance.get('/api/movies').then((res) => {
     movies.value = res.data.data
   })
 }

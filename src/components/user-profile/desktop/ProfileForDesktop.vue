@@ -46,7 +46,7 @@ const showSaveButton = computed(() => {
 
 const updateEmail = async () => {
   await axiosInstance
-    .post('/api/update-email', { email: route.query.email })
+    .post('/api/profile/email', { email: route.query.email })
     .then(() => router.push({ name: 'profile' }))
 }
 
@@ -56,7 +56,7 @@ if (route.query.email) {
 
 const handleSubmit = async (data, { resetForm }) => {
   await axiosInstance
-    .post('/api/update-user', {
+    .post('/api/profile/user', {
       user: user.value,
       email: data.email,
       password: data.password,

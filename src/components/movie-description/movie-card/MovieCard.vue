@@ -18,7 +18,7 @@ const backUrl = import.meta.env.VITE_API_BASE_URL
 const movie = ref(null)
 
 const getMovie = async () => {
-  await axiosInstance.get(`/api/get-movie/${props.id}`).then((res) => {
+  await axiosInstance.get(`/api/movies/${props.id}`).then((res) => {
     movie.value = { ...res.data.data }
   })
 }
@@ -26,8 +26,7 @@ const getMovie = async () => {
 watch(
   () => route.params,
   () => {
-    console.log('yep')
-    getMovie()
+    if (route.name == 'movie-description') getMovie()
   }
 )
 

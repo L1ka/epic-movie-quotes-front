@@ -14,7 +14,7 @@ const { user } = storeToRefs(useUserStore())
 
 const updateEmail = async () => {
   await axiosInstance
-    .post('/api/update-email', { email: route.query.email })
+    .post('/api/profile/email', { email: route.query.email })
     .then(() => router.push({ name: 'profile' }))
 }
 

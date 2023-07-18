@@ -34,7 +34,7 @@ const closeModal = () => {
 
 const handleSubmit = async (data) => {
   await axiosInstance.post(
-    'api/quote/store',
+    'api/quotes',
     {
       ...data,
       ...{ image: image.value ? image.value : data.image },

@@ -13,7 +13,7 @@ const movie = ref(null)
 const { selectedLocale } = storeToRefs(useLocaleStore())
 
 const getMovies = async () => {
-  await axiosInstance.get(`/api/get-movie/${props.id}`).then((res) => {
+  await axiosInstance.get(`/api/movies/${props.id}`).then((res) => {
     movie.value = res.data.data
   })
 }
@@ -44,7 +44,7 @@ onMounted(() => {
           v-for="genre in movie.genres"
           :key="genre.id"
         >
-          {{ genre.genre }}
+          {{ genre.genre[selectedLocale] }}
         </div>
       </div>
     </div>

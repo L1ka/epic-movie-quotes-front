@@ -31,7 +31,7 @@ onMounted(() => {
       :class="hasBorder"
     />
 
-    <p class="text-white text-sm lg:text-sm-bold capitalize" v-if="sidebar">
+    <p class="text-white text-sm lg:text-sm-bold capitalize">
       {{ user.first_name }}
     </p>
   </div>
