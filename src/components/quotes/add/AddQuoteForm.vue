@@ -15,20 +15,15 @@ const props = defineProps({
 })
 
 const handleSubmit = async (data) => {
-  await axiosInstance.post(
-    'api/quote/store',
-    {
-      ...data,
-      ...{ image: props.image ? props.image : data.image },
-      id: props.id,
-      user_id: user.value.id
-    },
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    }
-  )
+  const formData = new FormData()
+  formData.append('image', props.image ? props.image : data.image)
+  formData.append('quote', JSON.stringify(data.quote))
+  formData.append('user_id', user.value.id)
+  formData.append('movie_id', props.id)
+
+  await axiosInstance.post(`api/quotes`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  })
 
   emit('update')
 

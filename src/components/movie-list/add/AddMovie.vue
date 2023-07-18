@@ -38,17 +38,17 @@ const onDrop = (e) => {
 
 const handleSubmit = async (data) => {
   if (!SelectedValue.value.length) return
+  const formData = new FormData()
+  formData.append('image', image.value ? image.value : data.image)
+  formData.append('title', JSON.stringify(data.title))
+  formData.append('discription', JSON.stringify(data.discription))
+  formData.append('director', JSON.stringify(data.director))
+  formData.append('year', data.year)
+  formData.append('user_id', user.value.id)
+  formData.append('genre', JSON.stringify(SelectedValue.value))
+  console.log(SelectedValue.value)
   await axiosInstance
-    .post(
-      '/api/movie/create',
-      {
-        ...data,
-        ...{ image: image.value ? image.value : data.image },
-        genre: SelectedValue.value,
-        user_id: user.value.id
-      },
-      { headers: { 'Content-Type': 'multipart/form-data' } }
-    )
+    .post('/api/movies', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
     .then(() => route.push({ name: 'movie-list' }))
     .catch((error) => {
       errorsFromBack.value = error.response.data.message
@@ -64,14 +64,14 @@ const handleSubmit = async (data) => {
     class="flex justify-center top-0 left-0 bottom-0 right-0 backdrop-brightness-50 bg-light-black/30 absolute z-40"
   >
     <Form
-      v-if="show && options[11]"
+      v-if="show && options"
       ref="modal"
       class="w-full lg:w-[60%] flex flex-col items-center px-7 bg-black text-white z-50 overflow-y-scroll max-h-[1000px] lg:mt-28"
       @submit="handleSubmit"
     >
       <add-movie-header></add-movie-header>
 
-      <user-card class="self-start"></user-card>
+      <user-card class="self-start" sidebar="sidebar"></user-card>
 
       <the-input
         placeholder="Movie name"

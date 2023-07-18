@@ -30,14 +30,15 @@ onClickOutside(modal, () => {
 })
 
 onMounted(async () => {
-  await axiosInstance.get(`api/get-movie/${id}`).then((res) => {
-    console.log(res)
+  await axiosInstance.get(`api/movies/${id}`).then((res) => {
     movie.value = res.data.data
 
     res.data.data.genres.forEach((el) => {
       value.value.push(el.id)
     })
   })
+
+  console.log(movie.value)
 })
 
 const uploadImage = (file) => {
@@ -75,16 +76,26 @@ const onDrop = (e) => {
 const handleSubmit = async (data) => {
   if (!value.value.length) return
 
+  const formData = new FormData()
+
+  Object.entries(data).forEach(([key, value]) => {
+    if (typeof value === 'object') {
+      Object.entries(value).forEach(([subKey, subValue]) => {
+        formData.append(`${key}[${subKey}]`, subValue)
+      })
+    } else {
+      formData.append(key, value)
+    }
+  })
+
+  formData.append('image', image.value ? image.value : data.image)
+  formData.append('genre', JSON.stringify(value.value))
+  formData.append('_method', 'patch')
+
   await axiosInstance
-    .post(
-      'api/movie/update',
-      { ...data, ...{ image: image.value ? image.value : data.image }, genre: value.value, id: id },
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }
-    )
+    .post(`api/movies/${id}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    })
     .then(() => {
       show.value = false
       router.push({ name: 'movie-list' })
