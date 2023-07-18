@@ -16,7 +16,8 @@ configure({
         confirmed: 'confirm password does not match password',
         alpha: 'use Latin characters',
         alpha_latin: 'use Latin characters',
-        numeric: 'should contain 4 digit number'
+        numeric: 'should contain 4 digit number',
+        alpha_geo: 'use Georgian characters'
       },
       names: {
         first_name: 'name',
@@ -36,7 +37,8 @@ configure({
         alpha: 'გამოიყენეთ ქართული სიმბოლოები',
         numeric: 'აღნიშნული ველი უნდა შედგებოდეს 4 ციფრისგან',
         image: 'ფოტოს ფორმატი არასწორია',
-        alpha_geo: 'გამოიყენეთ ლათინური სიმბოლოები'
+        alpha_geo: 'გამოიყენეთ ქართული სიმბოლოები',
+        alpha_latin: 'გამოიყენეთ ლათინური სიმბოლოები'
       },
       names: {
         email: 'ელ.ფოსტი',
