@@ -69,7 +69,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <nav class="backdrop-blur-xl bg-light-gray w-full px-8 py-6 flex justify-between fixed z-30">
+  <nav
+    class="backdrop-blur-xl bg-light-gray w-full px-8 py-6 flex justify-between items-center fixed z-30"
+  >
     <icon-navigation @click="sideBarIsOpen = true" class="lg:hidden"></icon-navigation>
     <p class="text-light-yallow uppercase hidden lg:block">Movie quotes</p>
     <side-bar ref="modal" v-if="sideBarIsOpen" class="lg:hidden"></side-bar>
