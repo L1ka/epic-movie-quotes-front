@@ -12,7 +12,7 @@ const props = defineProps({
   <router-link
     :to="{ name: to }"
     :class="color ? color : 'border border-white rounded'"
-    class="text-white rounded py-3 px-[4px] md:py-[7px] md:px-[13px] text-center"
+    class="text-white rounded text-xs md:text-sm py-2 px-[4px] md:py-[7px] md:px-[13px] text-center"
   >
     {{ title }}
   </router-link>
