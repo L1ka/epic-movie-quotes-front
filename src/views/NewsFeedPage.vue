@@ -102,11 +102,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-col xl:items-center lg:items-end pt-20 md:pt-28" :class="modal">
-    <!-- <icon-search
-      class="mr-2 fixed top-7 right-24 z-30 w-8 h-6 lg:hidden"
-      @click="open = true"
-    ></icon-search> -->
+  <div class="flex flex-col xl:items-center lg:items-end pt-20 md:pt-28 pb-24" :class="modal">
     <search-for-mobile
       v-if="isOpen"
       v-model="searchValue"

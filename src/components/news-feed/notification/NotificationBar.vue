@@ -36,7 +36,7 @@ const markAsRead = async () => {
 
 <template>
   <div
-    class="bg-black absolute z-[10000] left-0 right-0 top-[110%] px-8 py-6 text-white rounded-md lg:left-[50%] overflow-scroll max-h-screen"
+    class="bg-black absolute z-[10000] left-0 right-0 top-[110%] px-8 py-6 text-white rounded-md lg:left-[50%] overflow-scroll max-h-[700px] pb-12"
   >
     <div>
       <div class="flex justify-between mb-8">
