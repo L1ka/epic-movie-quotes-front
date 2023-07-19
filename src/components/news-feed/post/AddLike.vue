@@ -4,7 +4,7 @@ import IconMessage from '@/components/icons/IconMessage.vue'
 import axiosInstance from '@/config/axios/index.js'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store/getUser.js'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const { user } = storeToRefs(useUserStore())
 const emit = defineEmits(['update', 'show'])
@@ -19,6 +19,10 @@ const show = () => {
   showAllItems.value = !showAllItems.value
   return showAllItems.value
 }
+
+const likedFromUser = computed(() => {
+  return props.quote.liked_by_user
+})
 
 const addLikes = async (id) => {
   await axiosInstance.post('/api/like', {
@@ -38,7 +42,11 @@ const addLikes = async (id) => {
     </div>
     <div class="flex">
       <p class="text-white mr-3 text-sm lg:text-sm-bold">{{ quote.likes_count }}</p>
-      <icon-heart class="w-6 lg:w-8 cursor-pointer" @click="addLikes(quote.id)"></icon-heart>
+      <icon-heart
+        class="w-6 lg:w-8 cursor-pointer"
+        @click="addLikes(quote.id)"
+        :class="likedFromUser ? 'fill-red' : 'fill-white'"
+      ></icon-heart>
     </div>
   </div>
 </template>

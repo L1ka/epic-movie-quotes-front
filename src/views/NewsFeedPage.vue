@@ -6,6 +6,8 @@ import SearchForMobile from '@/components/news-feed/SearchForMobile.vue'
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 import axiosInstance from '@/config/axios/index.js'
 import { useRoute, useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/store/getUser.js'
 
 const quotes = reactive({ quotes: [] })
 const currentPage2 = ref(1)
@@ -16,6 +18,7 @@ const router = useRouter()
 const focused = ref(false)
 const open = ref(false)
 const route = useRoute()
+const { user } = storeToRefs(useUserStore())
 const emit = defineEmits(['close'])
 const props = defineProps({ isOpen: { type: Boolean, required: false } })
 
@@ -95,6 +98,14 @@ onMounted(() => {
     quotes.quotes.forEach((element) => {
       if (element.id == data.likes.quote_id) {
         element.likes_count = data.likes.count
+        console.log(data.likes.user)
+        if (data.likes.user == user.value.id && data.likes.liked) {
+          element.liked_by_user = true
+        }
+
+        if (data.likes.user == user.value.id && !data.likes.liked) {
+          element.liked_by_user = false
+        }
       }
     })
   })
