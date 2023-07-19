@@ -1,9 +1,8 @@
 <script setup>
 import UserCard from '@/components/news-feed/UserCard.vue'
-import { useDateStore } from '@/store/getDate.js'
+import getDate from '@/services/date/getDate'
 
 const props = defineProps({ notification: { type: Object, required: true } })
-const { getDate } = useDateStore()
 
 const date = getDate(props.notification.created_at)
 </script>
