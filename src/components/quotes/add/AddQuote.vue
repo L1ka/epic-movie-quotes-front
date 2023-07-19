@@ -41,7 +41,7 @@ onClickOutside(modal, close)
     @dragleave.prevent
   >
     <div
-      class="text-white relative z-50 bg-modal-black lg:mt-24 lg:w-[60%] overflow-y-scroll max-h-[1000px] lg:mb-12"
+      class="text-white relative z-50 bg-modal-black w-full lg:mt-24 lg:w-[60%] overflow-y-scroll max-h-[1000px] lg:mb-12"
     >
       <div ref="modal" v-if="show">
         <quote-header @open="close"></quote-header>
