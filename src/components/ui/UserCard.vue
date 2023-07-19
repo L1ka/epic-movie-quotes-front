@@ -7,7 +7,7 @@ const { user } = storeToRefs(useUserStore())
 const { getUser } = useUserStore()
 const backUrl = import.meta.env.VITE_API_BASE_URL
 const props = defineProps({
-  sidebar: { type: String, required: false },
+  type: { type: String, required: false },
   hasBorder: { type: String, required: false }
 })
 onMounted(() => {
@@ -31,7 +31,7 @@ onMounted(() => {
       :class="hasBorder"
     />
 
-    <p class="text-white text-sm lg:text-sm-bold capitalize">
+    <p class="text-white text-sm lg:text-sm-bold capitalize" :class="type ? 'hidden' : ''">
       {{ user.first_name }}
     </p>
   </div>

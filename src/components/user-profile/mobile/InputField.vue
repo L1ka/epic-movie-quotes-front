@@ -20,7 +20,7 @@ const emit = defineEmits(['visible', 'edit'])
 
 <template>
   <div v-if="input" class="fixed top-0 left-0 right-0 bottom-0 bg-black/30"></div>
-  <div v-if="input" class="fixed top-20 left-0 right-0 bottom-0 bg-black"></div>
+  <div v-if="input" class="fixed z-10 top-20 left-0 right-0 bottom-0 bg-black"></div>
   <div
     class="mb-6 absolute top-24 left-[50%] translate-x-[-50%] z-40 py-10 w-full"
     id="1"

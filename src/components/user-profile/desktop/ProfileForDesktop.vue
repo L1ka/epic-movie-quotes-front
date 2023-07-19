@@ -84,7 +84,7 @@ const handleSubmit = async (data, { resetForm }) => {
 
     <p class="hidden lg:block text-white">{{ $t('profile.profile') }}</p>
     <div
-      class="bg-light-black relative lg:text-dark-gray lg:bg-modal-black px-8 lg:px-24 2xl:px-40 flex flex-col items-center mt-6 lg:mt-32 w-full lg:w-[55%] h-screen lg:h-full lg:pb-44 mb-48"
+      class="bg-light-black relative lg:text-dark-gray lg:bg-modal-black px-8 lg:px-36 2xl:px-52 flex flex-col items-center mt-6 lg:mt-32 w-full lg:w-[55%] h-screen lg:h-full lg:pb-44 mb-48"
     >
       <user-image></user-image>
 
@@ -96,7 +96,7 @@ const handleSubmit = async (data, { resetForm }) => {
           @show="showInput($event)"
         ></old-value-field>
 
-        <div class="mb-6 input" id="1" v-if="visibleInputs.input1">
+        <div class="mb-6 input w-full" id="1" v-if="visibleInputs.input1">
           <p class="mb-2">{{ $t('profile.new_username') }}</p>
 
           <the-input
@@ -104,7 +104,7 @@ const handleSubmit = async (data, { resetForm }) => {
             name="first_name"
             rules="required|min:3|max:15|alpha_num_lower"
             :errors="errors"
-            class="mb-[0] w-[750px] text-dark-gray"
+            class="mb-[0] w-full text-dark-gray"
             :valid="meta.valid"
             :placeholder="$t('profile.enter_username')"
           ></the-input>
