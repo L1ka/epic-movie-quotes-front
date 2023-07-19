@@ -74,8 +74,8 @@ onMounted(() => {
     <p class="text-light-yallow uppercase hidden lg:block">Movie quotes</p>
     <side-bar ref="modal" v-if="sideBarIsOpen" class="lg:hidden"></side-bar>
 
-    <div class="flex lg:w-[25%] xl:w-[20%]">
-      <div class="flex items-center justify-between lg:w-full relative">
+    <div class="flex">
+      <div class="flex gap-6 items-center justify-between lg:w-full relative">
         <div class="relative" @click="open = !open">
           <p
             class="bg-base-red text-white rounded-full text-sm w-[25px] h-[25px] flex justify-center items-center absolute top-[-20%] right-0"
