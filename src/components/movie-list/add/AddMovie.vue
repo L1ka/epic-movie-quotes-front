@@ -111,7 +111,7 @@ const handleSubmit = async (data) => {
         :type="movie?.type"
       ></the-input>
 
-      <add-image></add-image>
+      <add-image :image="image"></add-image>
 
       <submit-button
         @submit="SelectedValue.length == 0 ? (showGenreArror = true) : ''"

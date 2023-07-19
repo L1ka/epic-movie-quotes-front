@@ -33,20 +33,14 @@ const closeModal = () => {
 }
 
 const handleSubmit = async (data) => {
-  await axiosInstance.post(
-    'api/quotes',
-    {
-      ...data,
-      ...{ image: image.value ? image.value : data.image },
-      id: movieId.value,
-      user_id: user.value.id
-    },
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    }
-  )
+  const formData = new FormData()
+  formData.append('image', image.value ? image.value : data.image)
+  formData.append('quote', JSON.stringify(data.quote))
+  formData.append('user_id', user.value.id)
+  formData.append('movie_id', movieId.value)
+  await axiosInstance.post('api/quotes', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  })
 
   closeModal()
 }
