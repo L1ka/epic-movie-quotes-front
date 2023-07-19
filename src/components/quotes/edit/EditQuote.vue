@@ -4,7 +4,7 @@ import EditQuoteForm from '@/components/quotes/edit/EditQuoteForm.vue'
 import UserCard from '@/components/ui/UserCard.vue'
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import axiosInstance from '@/config/axios/index.js'
+import { fetchQuote } from '@/services/api'
 import { onClickOutside } from '@vueuse/core'
 
 const route = useRoute()
@@ -21,9 +21,7 @@ const close = () => {
 onClickOutside(modal, close)
 
 const getQuote = async () => {
-  await axiosInstance.get(`/api/quote/${route.params.quoteId}`).then((res) => {
-    quote.value = res.data.data
-  })
+  quote.value = await fetchQuote(route.params.quoteId)
 }
 
 onMounted(() => {

@@ -4,25 +4,29 @@ import TheInput from '@/components/movie-list/edit/TheInput.vue'
 import TheImage from '@/components/movie-list/edit/TheImage.vue'
 import EditImage from '@/components/movie-list/edit/EditImage.vue'
 import UserCard from '@/components/ui/UserCard.vue'
-import { useGenresStore } from '@/store/getGenres.js'
-import { storeToRefs } from 'pinia'
 import { onMounted, ref } from 'vue'
 import { Form } from 'vee-validate'
 import axiosInstance from '@/config/axios/index.js'
 import { onClickOutside } from '@vueuse/core'
 import { useRouter, useRoute } from 'vue-router'
 import Multiselect from '@vueform/multiselect'
+import { fetchMovie } from '@/services/api'
+import { fetchGenres } from '@/services/api'
 
 const route = useRoute()
 const id = route.params.id
 const image = ref('')
 const test = ref(null)
-const { options } = storeToRefs(useGenresStore())
+const options = ref({})
 const value = ref([])
 const movie = ref(null)
 const modal = ref(null)
 const router = useRouter()
 const show = ref(true)
+
+const getGenres = async () => {
+  options.value = await fetchGenres()
+}
 
 onClickOutside(modal, () => {
   show.value = false
@@ -30,15 +34,12 @@ onClickOutside(modal, () => {
 })
 
 onMounted(async () => {
-  await axiosInstance.get(`api/movies/${id}`).then((res) => {
-    movie.value = res.data.data
-
-    res.data.data.genres.forEach((el) => {
-      value.value.push(el.id)
-    })
+  movie.value = await fetchMovie(id)
+  movie.value.genres.forEach((el) => {
+    value.value.push(el.id)
   })
 
-  console.log(movie.value)
+  getGenres()
 })
 
 const uploadImage = (file) => {

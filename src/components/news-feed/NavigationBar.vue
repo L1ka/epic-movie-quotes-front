@@ -10,6 +10,7 @@ import axiosInstance from '@/config/axios/index.js'
 import { onClickOutside } from '@vueuse/core'
 import instantiatePusher from '@/helpers/instantiatePusher.js'
 import { useRouter } from 'vue-router'
+import { fetchNotifications } from '@/services/api'
 
 const pusherActive = ref(false)
 const router = useRouter()
@@ -22,14 +23,13 @@ const props = defineProps({
   userId: { type: Number }
 })
 
-const getNotifications = async () => [
-  await axiosInstance.get(`/api/notifications`).then((res) => {
-    notificationsArr.value = res.data.data
-    length.value = res.data.data.filter((el) => {
-      return el.seen === 0
-    }).length
-  })
-]
+const getNotifications = async () => {
+  notificationsArr.value = await fetchNotifications()
+
+  length.value = notificationsArr.value.filter((el) => {
+    return el.seen === 0
+  }).length
+}
 
 const logout = async () => {
   await axiosInstance.post('api/logout').then(() => {

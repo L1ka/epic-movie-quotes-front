@@ -6,15 +6,14 @@ import axiosInstance from '@/config/axios/index.js'
 import { onMounted } from 'vue'
 import { ref, watch, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { fetchMovies } from '@/services/api'
 
 const movies = ref(null)
 const route = useRoute()
 const router = useRouter()
 
 const getMovies = async () => {
-  await axiosInstance.get('/api/movies').then((res) => {
-    movies.value = res.data.data
-  })
+  movies.value = await fetchMovies()
 }
 
 const handleSearch = async (search) => {

@@ -6,8 +6,7 @@ import SearchForMobile from '@/components/news-feed/SearchForMobile.vue'
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 import axiosInstance from '@/config/axios/index.js'
 import { useRoute, useRouter } from 'vue-router'
-import { storeToRefs } from 'pinia'
-import { useUserStore } from '@/store/getUser.js'
+import { fetchUser } from '@/services/api'
 
 const quotes = reactive({ quotes: [] })
 const currentPage2 = ref(1)
@@ -18,7 +17,10 @@ const router = useRouter()
 const focused = ref(false)
 const open = ref(false)
 const route = useRoute()
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 const emit = defineEmits(['close'])
 const props = defineProps({ isOpen: { type: Boolean, required: false } })
 
@@ -83,6 +85,7 @@ const handleSearch = async (value) => {
 
 onMounted(() => {
   handleSearch()
+  getUser()
 
   window.addEventListener('scroll', handleScroll)
 

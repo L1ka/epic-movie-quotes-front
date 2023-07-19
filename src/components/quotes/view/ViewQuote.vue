@@ -6,8 +6,8 @@ import QuoteInfo from '@/components/quotes/view/QuoteInfo.vue'
 import AddComment from '@/components/news-feed/post/AddComment.vue'
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import axiosInstance from '@/config/axios/index.js'
 import { onClickOutside } from '@vueuse/core'
+import { fetchQuote } from '@/services/api'
 
 const route = useRoute()
 const router = useRouter()
@@ -28,9 +28,7 @@ const showComents = (e) => {
 onClickOutside(modal, close)
 
 const getQuotes = async () => {
-  await axiosInstance.get(`/api/quote/${route.params.quoteId}`).then((res) => {
-    quotes.value = res.data.data
-  })
+  quotes.value = await fetchQuote(route.params.quoteId)
 }
 
 onMounted(() => {

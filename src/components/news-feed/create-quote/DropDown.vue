@@ -4,7 +4,7 @@ import IconFilledDownArrow from '@/components/icons/IconFilledDownArrow.vue'
 import { useLocaleStore } from '@/store/locale.js'
 import { storeToRefs } from 'pinia'
 import { ref, onMounted } from 'vue'
-import axiosInstance from '@/config/axios/index.js'
+import { fetchMovies } from '@/services/api'
 
 const { selectedLocale } = storeToRefs(useLocaleStore())
 const dropdownToggle = ref(false)
@@ -14,10 +14,7 @@ const myMovies = ref([])
 const emit = defineEmits(['select'])
 
 const getMovies = async () => {
-  await axiosInstance.get('/api/movies').then((res) => {
-    console.log(res)
-    myMovies.value = res.data.data
-  })
+  myMovies.value = await fetchMovies()
 }
 
 const select = (title, id) => {

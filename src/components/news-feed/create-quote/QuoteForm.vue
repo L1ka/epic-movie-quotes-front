@@ -4,14 +4,17 @@ import DropDown from '@/components/news-feed/create-quote/DropDown.vue'
 import UserCard from '@/components/news-feed/UserCard.vue'
 import AddImage from '@/components/quotes/add/AddImage.vue'
 import { Form, Field, ErrorMessage } from 'vee-validate'
-import { ref } from 'vue'
-import { useUserStore } from '@/store/getUser.js'
-import { storeToRefs } from 'pinia'
+import { ref, onMounted } from 'vue'
 import axiosInstance from '@/config/axios/index.js'
 import { onClickOutside } from '@vueuse/core'
 import { useRouter } from 'vue-router'
+import { fetchUser } from '@/services/api'
 
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 
 const router = useRouter()
 
@@ -46,6 +49,10 @@ const handleSubmit = async (data) => {
 }
 
 onClickOutside(modal, () => closeModal())
+
+onMounted(() => {
+  getUser()
+})
 </script>
 
 <template>

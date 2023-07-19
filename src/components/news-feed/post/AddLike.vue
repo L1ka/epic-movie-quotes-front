@@ -2,11 +2,13 @@
 import IconHeart from '@/components/icons/IconHeart.vue'
 import IconMessage from '@/components/icons/IconMessage.vue'
 import axiosInstance from '@/config/axios/index.js'
-import { storeToRefs } from 'pinia'
-import { useUserStore } from '@/store/getUser.js'
-import { ref, computed } from 'vue'
+import { fetchUser } from '@/services/api'
+import { ref, computed, onMounted } from 'vue'
 
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 const emit = defineEmits(['update', 'show'])
 
 const props = defineProps({
@@ -32,6 +34,10 @@ const addLikes = async (id) => {
   })
   emit('update')
 }
+
+onMounted(() => {
+  getUser()
+})
 </script>
 
 <template>

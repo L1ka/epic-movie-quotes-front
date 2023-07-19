@@ -5,13 +5,15 @@ import UserCard from '@/components/ui/UserCard.vue'
 import SetLocale from '@/components/ui/SetLocale.vue'
 import axiosInstance from '@/config/axios/index.js'
 import { useRoute, useRouter } from 'vue-router'
-import { computed } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useUserStore } from '@/store/getUser.js'
+import { computed, onMounted, ref } from 'vue'
+import { fetchUser } from '@/services/api'
 
 const route = useRoute()
 const router = useRouter()
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 
 const logout = async () => {
   await axiosInstance.post('api/logout').then(() => {
@@ -31,6 +33,8 @@ const newsFeedActive = computed(() => {
 const hasBorder = computed(() => {
   return route.path === '/profile' ? 'border-2  border-base-red' : ''
 })
+
+onMounted(() => getUser())
 </script>
 
 <template>
@@ -41,7 +45,7 @@ const hasBorder = computed(() => {
       <user-card class="mb-0 mt-0" :hasBorder="hasBorder" type="sidebar"> </user-card>
 
       <div class="flex flex-col lg:text-xs xl:text-sm">
-        <p class="text-white text-sm lg:text-sm capitalize">{{ user.first_name }}</p>
+        <p class="text-white text-sm lg:text-sm capitalize">{{ user?.first_name }}</p>
         <p class="text-xs text-gray">{{ $t('side_bar.edit_profile') }}</p>
       </div>
     </router-link>

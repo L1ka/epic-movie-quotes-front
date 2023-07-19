@@ -1,16 +1,20 @@
 <script setup>
 import NavigationBar from '@/components/news-feed/NavigationBar.vue'
 import SideBar from '@/components/news-feed/SideBar.vue'
-import { useUserStore } from '@/store/getUser.js'
-import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { fetchUser } from '@/services/api'
 
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 const isOpen = ref(false)
 
 const openSearch = () => {
   isOpen.value = !isOpen.value
 }
+
+onMounted(() => getUser())
 </script>
 
 <template>

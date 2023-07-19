@@ -5,26 +5,31 @@ import UserCard from '@/components/ui/UserCard.vue'
 import TheInput from '@/components/movie-list/add/TheInput.vue'
 import AddImage from '@/components/movie-list/add/AddImage.vue'
 import { onClickOutside } from '@vueuse/core'
-import { useUserStore } from '@/store/getUser.js'
 import { useInfoStore } from '@/store/movieInfo.js'
-import { useGenresStore } from '@/store/getGenres.js'
-import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Form } from 'vee-validate'
 import axiosInstance from '@/config/axios/index.js'
 import Multiselect from '@vueform/multiselect'
 import { useRouter } from 'vue-router'
+import { fetchGenres } from '@/services/api'
+import { fetchUser } from '@/services/api'
 
 const route = useRouter()
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 const { movieInfo } = useInfoStore()
-const { options } = storeToRefs(useGenresStore())
+const options = ref({})
 const modal = ref(null)
 const image = ref('')
 const errorsFromBack = ref('')
 const SelectedValue = ref([])
 const show = ref(true)
 const showGenreArror = ref(false)
+const getGenres = async () => {
+  options.value = await fetchGenres()
+}
 
 onClickOutside(modal, () => {
   show.value = false
@@ -54,6 +59,11 @@ const handleSubmit = async (data) => {
       errorsFromBack.value = error.response.data.message
     })
 }
+
+onMounted(() => {
+  getGenres()
+  getUser()
+})
 </script>
 
 <template>

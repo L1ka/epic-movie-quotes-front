@@ -1,11 +1,13 @@
 <script setup>
-import { useUserStore } from '@/store/getUser.js'
-import { storeToRefs } from 'pinia'
 import axiosInstance from '@/config/axios/index.js'
+import { ref, onMounted } from 'vue'
+import { fetchUser } from '@/services/api'
 
 const backUrl = import.meta.env.VITE_API_BASE_URL
-const { getUser } = useUserStore()
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 
 const handleFileUpload = (event) => {
   const formData = new FormData()
@@ -22,6 +24,8 @@ const handleFileUpload = (event) => {
       getUser()
     })
 }
+
+onMounted(() => getUser())
 </script>
 
 <template>

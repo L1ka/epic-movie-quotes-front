@@ -4,11 +4,11 @@ import AllQuotes from '@/components/movie-description/all-quotes/AllQuotes.vue'
 import EditOrDeleteMovie from '@/components/movie-description/movie-card/EditOrDeleteMovie.vue'
 import MovieGenres from '@/components/movie-description/movie-card/MovieGenres.vue'
 import QuoteSum from '@/components/movie-description/movie-card/QuoteSum.vue'
-import axiosInstance from '@/config/axios/index.js'
 import { onMounted, ref, watch } from 'vue'
 import { useLocaleStore } from '@/store/locale.js'
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'
+import { fetchMovie } from '@/services/api'
 
 const { selectedLocale } = storeToRefs(useLocaleStore())
 
@@ -18,9 +18,7 @@ const backUrl = import.meta.env.VITE_API_BASE_URL
 const movie = ref(null)
 
 const getMovie = async () => {
-  await axiosInstance.get(`/api/movies/${props.id}`).then((res) => {
-    movie.value = { ...res.data.data }
-  })
+  movie.value = await fetchMovie(props.id)
 }
 
 watch(

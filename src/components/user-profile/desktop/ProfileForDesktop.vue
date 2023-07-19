@@ -6,17 +6,18 @@ import ErrorMessage from '@/components/user-profile/mobile/ErrorMessage.vue'
 import UserImage from '@/components/user-profile/UserImage.vue'
 import { RouterView } from 'vue-router'
 import { Form } from 'vee-validate'
-import { useUserStore } from '@/store/getUser.js'
 import axiosInstance from '@/config/axios/index.js'
-import { storeToRefs } from 'pinia'
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { fetchUser } from '@/services/api'
 
 const router = useRouter()
 const route = useRoute()
 const errorsFromBack = ref(null)
-const { getUser } = useUserStore()
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 
 const form = reactive({
   email: '',
@@ -76,6 +77,8 @@ const handleSubmit = async (data, { resetForm }) => {
   resetForm()
   reset()
 }
+
+onMounted(() => getUser())
 </script>
 
 <template>

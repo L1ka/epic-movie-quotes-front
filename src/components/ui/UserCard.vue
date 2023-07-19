@@ -1,10 +1,11 @@
 <script setup>
-import { onMounted } from 'vue'
-import { useUserStore } from '@/store/getUser.js'
-import { storeToRefs } from 'pinia'
+import { onMounted, ref } from 'vue'
+import { fetchUser } from '@/services/api'
 
-const { user } = storeToRefs(useUserStore())
-const { getUser } = useUserStore()
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 const backUrl = import.meta.env.VITE_API_BASE_URL
 const props = defineProps({
   type: { type: String, required: false },

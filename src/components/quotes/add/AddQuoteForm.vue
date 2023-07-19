@@ -3,12 +3,15 @@ import AddImage from '@/components/quotes/add/AddImage.vue'
 import axiosInstance from '@/config/axios/index.js'
 import { Form, Field, ErrorMessage } from 'vee-validate'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/store/getUser.js'
-import { storeToRefs } from 'pinia'
+import { onMounted, ref } from 'vue'
+import { fetchUser } from '@/services/api'
 
 const emit = defineEmits(['update'])
 const router = useRouter()
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 const props = defineProps({
   id: { type: String, required: true },
   image: { type: [File, null], required: true }
@@ -29,6 +32,8 @@ const handleSubmit = async (data) => {
 
   router.push({ name: 'movie-description', params: { id: props.id } })
 }
+
+onMounted(() => getUser())
 </script>
 
 <template>

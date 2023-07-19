@@ -7,6 +7,7 @@ import QuoteInfo from '@/components/movie-description/all-quotes/QuoteInfo.vue'
 import { onMounted, ref, watch } from 'vue'
 import axiosInstance from '@/config/axios/index.js'
 import { useRoute } from 'vue-router'
+import { fetchQuote } from '@/services/api'
 
 const quotes = ref(null)
 const route = useRoute()
@@ -36,10 +37,7 @@ const deleteQuote = async (id, index) => {
 }
 
 const getQuotes = async () => {
-  await axiosInstance.get(`/api/quotes/${props.id}`).then((res) => {
-    console.log(res.data.data)
-    quotes.value = res.data.data
-  })
+  quotes.value = await fetchQuote(props.id)
 }
 
 watch(

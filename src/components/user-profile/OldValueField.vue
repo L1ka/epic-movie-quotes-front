@@ -1,6 +1,6 @@
 <script setup>
-import { useUserStore } from '@/store/getUser.js'
-import { storeToRefs } from 'pinia'
+import { fetchUser } from '@/services/api'
+import { onMounted, ref } from 'vue'
 
 const props = defineProps({
   title: { type: String, required: true },
@@ -8,7 +8,11 @@ const props = defineProps({
   id: { type: String, required: true }
 })
 
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
+onMounted(() => getUser())
 </script>
 
 <template>
@@ -16,7 +20,7 @@ const { user } = storeToRefs(useUserStore())
     <p class="mb-2">{{ title }}</p>
     <div class="flex items-center justify-between w-full border-b-2 border-border lg:border-none">
       <p class="lg:bg-gray px-3 py-3 lg:text-dark-gray w-full rounded-md">
-        {{ name == 'password' ? '*******' : user[name] }}
+        {{ name == 'password' ? '*******' : user?.[name] }}
       </p>
       <p @click="$emit('show', id)" class="p-4 absolute lg:right-20 right-8">
         {{ $t('profile.edit') }}

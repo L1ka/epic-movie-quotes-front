@@ -4,10 +4,13 @@ import { useUserStore } from '@/store/getUser.js'
 import { Form, Field } from 'vee-validate'
 import axiosInstance from '@/config/axios/index.js'
 import { onMounted, ref } from 'vue'
+import { fetchUser } from '@/services/api'
 
 const backUrl = import.meta.env.VITE_API_BASE_URL
-const { getUser } = useUserStore()
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 const comment = ref('')
 const emit = defineEmits(['update'])
 
@@ -36,7 +39,7 @@ onMounted(() => {
 <template>
   <Form class="flex items-center mt-4 mb-10">
     <div
-      :style="{ 'background-image': 'url(' + backUrl + user.image + ')' }"
+      :style="{ 'background-image': 'url(' + backUrl + user?.image + ')' }"
       class="w-14 h-14 mr-4 bg-cover bg-no-repeat bg-center rounded-full mb-2"
     ></div>
 
