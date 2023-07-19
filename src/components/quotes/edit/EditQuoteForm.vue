@@ -40,14 +40,14 @@ const handleSubmit = async (data) => {
     <the-input
       name="quote.en"
       language="Eng"
-      :value="quote.quote.en"
+      :value="quote.quote?.en"
       rules="required|min:3|max:30|alpha_latin"
     ></the-input>
 
     <the-input
       name="quote.ka"
       language="ქარ"
-      :value="quote.quote.ka"
+      :value="quote.quote?.ka"
       rules="required|min:3|max:30|alpha_geo"
     ></the-input>
 

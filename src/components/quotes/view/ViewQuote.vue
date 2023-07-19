@@ -7,7 +7,7 @@ import AddComment from '@/components/news-feed/post/AddComment.vue'
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { onClickOutside } from '@vueuse/core'
-import { fetchQuote } from '@/services/api'
+import { fetchOneQuote } from '@/services/api'
 
 const route = useRoute()
 const router = useRouter()
@@ -28,7 +28,7 @@ const showComents = (e) => {
 onClickOutside(modal, close)
 
 const getQuotes = async () => {
-  quotes.value = await fetchQuote(route.params.quoteId)
+  quotes.value = await fetchOneQuote(route.params.quoteId)
 }
 
 onMounted(() => {

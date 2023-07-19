@@ -17,15 +17,15 @@ export async function fetchMovie(id) {
   return response.value
 }
 
-export async function fetchQuotes(formData) {
-  return await axiosInstance.post(`/api/quotes`, formData, {
-    headers: { 'Content-Type': 'multipart/form-data' }
-  })
-}
-
 export async function fetchQuote(movieId) {
   const response = ref(null)
   await axiosInstance.get(`/api/quotes/${movieId}`).then((res) => (response.value = res.data.data))
+  return response.value
+}
+
+export async function fetchOneQuote(quoteId) {
+  const response = ref(null)
+  await axiosInstance.get(`/api/quote/${quoteId}`).then((res) => (response.value = res.data.data))
   return response.value
 }
 
@@ -57,26 +57,3 @@ export async function fetchUser() {
   await axiosInstance.get(`/api/user`).then((res) => (response.value = res.data.data))
   return response.value
 }
-
-// onMounted(() => {
-//   getUser()
-// })
-
-// return { getUser, user }
-
-// export const useUserStore = defineStore('getUser', () => {
-//     let user = ref('')
-//     const getUser = async () => {
-//       try {
-//         await axiosInstance.get(`/api/user`).then((response) => (user.value = response.data.data))
-//       } catch (error) {
-//         console.log(error)
-//       }
-//     }
-
-//     onMounted(() => {
-//       getUser()
-//     })
-
-//     return { getUser, user }
-//   })

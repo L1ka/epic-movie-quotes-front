@@ -54,7 +54,7 @@ onMounted(() => getUser())
       :to="{ name: 'news-feed' }"
       class="flex items-center mb-12 ml-2 lg:text-xs xl:text-sm"
     >
-      <icon-house class="mr-10 lg:mr-6 w-8 h-8" :class="newsFeedActive"></icon-house>
+      <icon-house class="mr-10 lg:mr-6 w-9 h-9" :class="newsFeedActive"></icon-house>
       <p>{{ $t('side_bar.news_feed') }}</p>
     </router-link>
 

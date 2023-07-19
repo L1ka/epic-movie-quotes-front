@@ -97,6 +97,7 @@ onMounted(() => getUser())
           name="first_name"
           id="input1"
           @show="showInput($event)"
+          :user="user.first_name"
         ></old-value-field>
 
         <div class="mb-6 input w-full" id="1" v-if="visibleInputs.input1">
@@ -118,6 +119,7 @@ onMounted(() => getUser())
           id="input2"
           name="email"
           @show="showInput($event)"
+          :user="user.email"
         ></old-value-field>
 
         <div class="mb-6 input" id="2" v-if="visibleInputs.input2">

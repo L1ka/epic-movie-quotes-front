@@ -88,6 +88,7 @@ onMounted(() => getUser())
       :title="$t('profile.username')"
       name="first_name"
       id="input1"
+      :user="user.first_name"
       @show="showInput($event)"
     ></old-value-field>
 
@@ -109,6 +110,7 @@ onMounted(() => getUser())
       :title="$t('profile.email')"
       name="email"
       id="input2"
+      :user="user.email"
       @show="showInput($event)"
     ></old-value-field>
 
