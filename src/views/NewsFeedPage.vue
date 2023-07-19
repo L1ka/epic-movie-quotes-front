@@ -1,6 +1,5 @@
 <script setup>
 import PostCard from '@/components/news-feed/post/PostCard.vue'
-import IconSearch from '@/components/icons/IconSearch.vue'
 import CreateQuote from '@/components/news-feed/create-quote/CreateQuote.vue'
 import SearchBar from '@/components/news-feed/SearchBar.vue'
 import SearchForMobile from '@/components/news-feed/SearchForMobile.vue'
@@ -17,6 +16,8 @@ const router = useRouter()
 const focused = ref(false)
 const open = ref(false)
 const route = useRoute()
+const emit = defineEmits(['close'])
+const props = defineProps({ isOpen: { type: Boolean, required: false } })
 
 const width = computed(() => {
   return focused.value ? 'w-[30%]' : 'w-[70%]'
@@ -36,7 +37,6 @@ const modal = computed(() => {
     ? 'fixed top-0 left-0  right-0  bottom-0 bg-[#191525]'
     : 'static'
 })
-
 
 watch(searchValue, () => {
   currentPage2.value = 1
@@ -103,15 +103,15 @@ onMounted(() => {
 
 <template>
   <div class="flex flex-col xl:items-center lg:items-end pt-20 md:pt-28" :class="modal">
-    <icon-search
-      class="mr-2 fixed top-7 right-24 z-40 w-8 h-6 lg:hidden"
+    <!-- <icon-search
+      class="mr-2 fixed top-7 right-24 z-30 w-8 h-6 lg:hidden"
       @click="open = true"
-    ></icon-search>
+    ></icon-search> -->
     <search-for-mobile
-      v-if="open"
+      v-if="isOpen"
       v-model="searchValue"
       @handleSearch="handleSearch($event)"
-      @close="open = false"
+      @close="$emit('close')"
     ></search-for-mobile>
 
     <div class="lg:w-[70%] xl:w-[55%]">

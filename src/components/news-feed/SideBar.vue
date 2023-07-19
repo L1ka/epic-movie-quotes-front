@@ -35,7 +35,7 @@ const hasBorder = computed(() => {
 
 <template>
   <div
-    class="px-12 py-6 md:px-7 fixed z-10 top-0 left-0 right-[10%] lg:top-24 lg:right-[80%] lg:bg-transparent text-white bg-modal-black"
+    class="px-12 py-6 md:px-7 fixed z-[11000] md:z-10 top-0 left-0 right-[10%] lg:top-24 lg:right-[80%] lg:bg-transparent text-white bg-modal-black"
   >
     <router-link :to="{ name: 'profile' }" class="flex items-center mb-10 pt-8">
       <user-card class="mb-0 mt-0" :hasBorder="hasBorder" type="sidebar"> </user-card>
