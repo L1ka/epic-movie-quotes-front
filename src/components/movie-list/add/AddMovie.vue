@@ -108,7 +108,9 @@ onMounted(() => {
           mode="tags"
           class="w-full"
         />
-        <p v-if="showGenreArror" class="text-base-red mt-2">{{ $t('add_movie.required') }}</p>
+        <p v-if="showGenreArror && !SelectedValue.length" class="text-base-red mt-2">
+          {{ $t('add_movie.required') }}
+        </p>
       </div>
 
       <the-input

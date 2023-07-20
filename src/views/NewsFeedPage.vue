@@ -15,7 +15,6 @@ const lastPage = ref(null)
 const searchValue = ref('')
 const router = useRouter()
 const focused = ref(false)
-const open = ref(false)
 const route = useRoute()
 const user = ref(null)
 const getUser = async () => {
@@ -56,7 +55,7 @@ watch(
 )
 
 const handleSearch = async (value) => {
-  open.value = false
+  emit('close')
   if (lastPage.value !== null && currentPage2.value > lastPage.value) {
     return
   }
