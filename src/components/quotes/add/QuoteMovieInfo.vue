@@ -1,8 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import axiosInstance from '@/config/axios/index.js'
 import { useLocaleStore } from '@/store/locale.js'
 import { storeToRefs } from 'pinia'
+import { fetchMovie } from '@/services/api'
 
 const props = defineProps({
   id: { type: String }
@@ -13,9 +13,7 @@ const movie = ref(null)
 const { selectedLocale } = storeToRefs(useLocaleStore())
 
 const getMovies = async () => {
-  await axiosInstance.get(`/api/get-movie/${props.id}`).then((res) => {
-    movie.value = res.data.data
-  })
+  movie.value = await fetchMovie(props.id)
 }
 
 onMounted(() => {
@@ -44,7 +42,7 @@ onMounted(() => {
           v-for="genre in movie.genres"
           :key="genre.id"
         >
-          {{ genre.genre }}
+          {{ genre.genre[selectedLocale] }}
         </div>
       </div>
     </div>

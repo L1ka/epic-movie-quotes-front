@@ -1,20 +1,22 @@
 <script setup>
 import ProfileForMobile from '@/components/user-profile/mobile/ProfileForMobile.vue'
 import ProfileForDesktop from '@/components/user-profile/desktop/ProfileForDesktop.vue'
-import { useUserStore } from '@/store/getUser.js'
 import axiosInstance from '@/config/axios/index.js'
-import { storeToRefs } from 'pinia'
 import { useRouter, useRoute } from 'vue-router'
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
+import { fetchUser } from '@/services/api'
 
 const router = useRouter()
 const route = useRoute()
 const open = ref(false)
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 
 const updateEmail = async () => {
   await axiosInstance
-    .post('/api/update-email', { email: route.query.email })
+    .post('/api/profile/email', { email: route.query.email })
     .then(() => router.push({ name: 'profile' }))
 }
 
@@ -35,6 +37,8 @@ const modal = computed(() => {
     return ''
   }
 })
+
+onMounted(() => getUser())
 </script>
 
 <template>

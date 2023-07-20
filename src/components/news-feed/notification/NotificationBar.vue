@@ -2,15 +2,18 @@
 import ReactionNotification from '@/components/news-feed/notification/ReactionNotification.vue'
 import CommentNotification from '@/components/news-feed/notification/CommentNotification.vue'
 import axiosInstance from '@/config/axios/index.js'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { storeToRefs } from 'pinia'
-import { useUserStore } from '@/store/getUser.js'
+import { fetchUser } from '@/services/api'
 
 const router = useRouter()
 const props = defineProps({ notifications: { type: Object, required: true } })
 const notifications = ref(props.notifications)
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 const emit = defineEmits(['update', 'open-notification'])
 
 const openNotification = async (quoteId, movieId, notificationId) => {
@@ -32,11 +35,15 @@ const markAsRead = async () => {
 
   emit('update')
 }
+
+onMounted(() => {
+  getUser()
+})
 </script>
 
 <template>
   <div
-    class="bg-black absolute z-[10000] left-0 right-0 top-[110%] px-8 py-6 text-white rounded-md lg:left-[50%] overflow-scroll max-h-screen"
+    class="bg-black absolute z-[10000] left-0 right-0 top-[110%] px-8 py-6 text-white rounded-md lg:left-[50%] overflow-scroll max-h-[700px] pb-12"
   >
     <div>
       <div class="flex justify-between mb-8">

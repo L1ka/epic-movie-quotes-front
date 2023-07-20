@@ -2,11 +2,13 @@
 import IconHeart from '@/components/icons/IconHeart.vue'
 import IconMessage from '@/components/icons/IconMessage.vue'
 import axiosInstance from '@/config/axios/index.js'
-import { storeToRefs } from 'pinia'
-import { useUserStore } from '@/store/getUser.js'
-import { ref } from 'vue'
+import { fetchUser } from '@/services/api'
+import { ref, computed, onMounted } from 'vue'
 
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 const emit = defineEmits(['update', 'show'])
 
 const props = defineProps({
@@ -20,14 +22,22 @@ const show = () => {
   return showAllItems.value
 }
 
+const likedFromUser = computed(() => {
+  return props.quote.liked_by_user
+})
+
 const addLikes = async (id) => {
-  await axiosInstance.post('/api/create-like', {
+  await axiosInstance.post('/api/like', {
     user_id: user.value.id,
     quote_id: id,
     movie_id: props.quote.movie.id
   })
   emit('update')
 }
+
+onMounted(() => {
+  getUser()
+})
 </script>
 
 <template>
@@ -38,7 +48,11 @@ const addLikes = async (id) => {
     </div>
     <div class="flex">
       <p class="text-white mr-3 text-sm lg:text-sm-bold">{{ quote.likes_count }}</p>
-      <icon-heart class="w-6 lg:w-8 cursor-pointer" @click="addLikes(quote.id)"></icon-heart>
+      <icon-heart
+        class="w-6 lg:w-8 cursor-pointer"
+        @click="addLikes(quote.id)"
+        :class="likedFromUser ? 'fill-red' : 'fill-white'"
+      ></icon-heart>
     </div>
   </div>
 </template>

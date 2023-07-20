@@ -4,25 +4,29 @@ import TheInput from '@/components/movie-list/edit/TheInput.vue'
 import TheImage from '@/components/movie-list/edit/TheImage.vue'
 import EditImage from '@/components/movie-list/edit/EditImage.vue'
 import UserCard from '@/components/ui/UserCard.vue'
-import { useGenresStore } from '@/store/getGenres.js'
-import { storeToRefs } from 'pinia'
 import { onMounted, ref } from 'vue'
 import { Form } from 'vee-validate'
 import axiosInstance from '@/config/axios/index.js'
 import { onClickOutside } from '@vueuse/core'
 import { useRouter, useRoute } from 'vue-router'
 import Multiselect from '@vueform/multiselect'
+import { fetchMovie } from '@/services/api'
+import { fetchGenres } from '@/services/api'
 
 const route = useRoute()
 const id = route.params.id
 const image = ref('')
 const test = ref(null)
-const { options } = storeToRefs(useGenresStore())
+const options = ref({})
 const value = ref([])
 const movie = ref(null)
 const modal = ref(null)
 const router = useRouter()
 const show = ref(true)
+
+const getGenres = async () => {
+  options.value = await fetchGenres()
+}
 
 onClickOutside(modal, () => {
   show.value = false
@@ -30,14 +34,12 @@ onClickOutside(modal, () => {
 })
 
 onMounted(async () => {
-  await axiosInstance.get(`api/get-movie/${id}`).then((res) => {
-    console.log(res)
-    movie.value = res.data.data
-
-    res.data.data.genres.forEach((el) => {
-      value.value.push(el.id)
-    })
+  movie.value = await fetchMovie(id)
+  movie.value.genres.forEach((el) => {
+    value.value.push(el.id)
   })
+
+  getGenres()
 })
 
 const uploadImage = (file) => {
@@ -75,16 +77,26 @@ const onDrop = (e) => {
 const handleSubmit = async (data) => {
   if (!value.value.length) return
 
+  const formData = new FormData()
+
+  Object.entries(data).forEach(([key, value]) => {
+    if (typeof value === 'object') {
+      Object.entries(value).forEach(([subKey, subValue]) => {
+        formData.append(`${key}[${subKey}]`, subValue)
+      })
+    } else {
+      formData.append(key, value)
+    }
+  })
+
+  formData.append('image', image.value ? image.value : data.image)
+  formData.append('genre', JSON.stringify(value.value))
+  formData.append('_method', 'patch')
+
   await axiosInstance
-    .post(
-      'api/movie/update',
-      { ...data, ...{ image: image.value ? image.value : data.image }, genre: value.value, id: id },
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }
-    )
+    .post(`api/movies/${id}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    })
     .then(() => {
       show.value = false
       router.push({ name: 'movie-list' })
@@ -103,7 +115,7 @@ const handleSubmit = async (data) => {
     <Form
       ref="modal"
       v-if="movie && show"
-      class="w-full lg:w-[60%] flex flex-col items-center px-7 text-white z-10 bg-black overflow-y-scroll max-h-[1000px] lg:mt-28"
+      class="w-full lg:w-[60%] flex flex-col items-center px-7 text-white z-10 bg-modal-black overflow-y-scroll max-h-[1000px] lg:mt-28"
       @submit="handleSubmit"
     >
       <edit-movie-header></edit-movie-header>

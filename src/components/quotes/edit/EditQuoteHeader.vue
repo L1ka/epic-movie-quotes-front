@@ -18,13 +18,13 @@ const close = () => {
 }
 
 const deleteQuote = async () => {
-  await axiosInstance.delete(`/api/quote/delete/${props.quoteId}`)
+  await axiosInstance.delete(`/api/quote/${props.quoteId}`)
   close()
 }
 </script>
 
 <template>
-  <div class="border-b-2 border-border py-8 px-8 flex justify-between">
+  <div class="border-b-2 border-border py-8 px-8 flex justify-between relative">
     <div class="flex" @click="showConfirmation = !showConfirmation">
       <icon-trash class="w-6 mr-2"></icon-trash>
       <p class="hidden md:block">{{ $t('edit_quote.delete') }}</p>

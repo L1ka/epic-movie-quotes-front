@@ -1,6 +1,13 @@
 <script setup>
 import IconPhoto from '@/components/icons/IconPhoto.vue'
 import { Field, ErrorMessage } from 'vee-validate'
+import { computed } from 'vue'
+
+const props = defineProps({ image: { type: [String, File, null], required: true } })
+
+const rules = computed(() => {
+  return !props.image ? 'required|image' : ''
+})
 </script>
 
 <template>
@@ -9,7 +16,7 @@ import { Field, ErrorMessage } from 'vee-validate'
       <Field
         type="file"
         name="image"
-        rules="required"
+        :rules="rules"
         class="w-full z-10 absolute top-[50%] translate-y-[-50%] py-2 cursor-pointer md:hidden"
       />
 
@@ -25,7 +32,7 @@ import { Field, ErrorMessage } from 'vee-validate'
           <Field
             type="file"
             name="image"
-            rules="required"
+            :rules="rules"
             class="z-10 w-full absolute top-[50%] translate-y-[-50%] py-2 cursor-pointer hidden md:inline"
           />
 
@@ -33,6 +40,6 @@ import { Field, ErrorMessage } from 'vee-validate'
         </div>
       </div>
     </div>
-    <ErrorMessage name="image" class="text-red" />
+    <ErrorMessage v-if="!image" name="image" class="text-red" />
   </div>
 </template>

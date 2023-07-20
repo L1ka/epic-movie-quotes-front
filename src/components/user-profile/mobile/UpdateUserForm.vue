@@ -5,12 +5,11 @@ import SuccessMessage from '@/components/user-profile/mobile/SuccessMessage.vue'
 import ErrorMessage from '@/components/user-profile/mobile/ErrorMessage.vue'
 import InputField from '@/components/user-profile/mobile/InputField.vue'
 import PasswordField from '@/components/user-profile/mobile/PasswordField.vue'
-import { useUserStore } from '@/store/getUser.js'
 import axiosInstance from '@/config/axios/index.js'
-import { storeToRefs } from 'pinia'
 import { Form } from 'vee-validate'
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { fetchUser } from '@/services/api'
 
 const showConfirmation = ref(false)
 const success = ref(false)
@@ -18,8 +17,10 @@ const router = useRouter()
 const route = useRoute()
 const errorsFromBack = ref(null)
 const emit = defineEmits(['modal'])
-const { getUser } = useUserStore()
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 
 const form = reactive({
   email: '',
@@ -42,7 +43,7 @@ const showInput = (e) => {
 
 const updateEmail = async () => {
   await axiosInstance
-    .post('/api/update-email', { email: route.query.email })
+    .post('/api/profile/email', { email: route.query.email })
     .then(() => router.push({ name: 'profile' }))
 }
 
@@ -52,7 +53,7 @@ if (route.query.email) {
 
 const handleSubmit = async (data, { resetForm }) => {
   await axiosInstance
-    .post('/api/update-user', {
+    .post('/api/profile/user', {
       user: user.value,
       email: data.email,
       password: data.password,
@@ -77,6 +78,7 @@ const handleSubmit = async (data, { resetForm }) => {
   visibleInputs.input3 = false
   showConfirmation.value = false
 }
+onMounted(() => getUser())
 </script>
 
 <template>
@@ -86,6 +88,7 @@ const handleSubmit = async (data, { resetForm }) => {
       :title="$t('profile.username')"
       name="first_name"
       id="input1"
+      :user="user.first_name"
       @show="showInput($event)"
     ></old-value-field>
 
@@ -107,6 +110,7 @@ const handleSubmit = async (data, { resetForm }) => {
       :title="$t('profile.email')"
       name="email"
       id="input2"
+      :user="user.email"
       @show="showInput($event)"
     ></old-value-field>
 

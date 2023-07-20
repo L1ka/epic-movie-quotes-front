@@ -1,13 +1,14 @@
 <script setup>
-import { onMounted } from 'vue'
-import { useUserStore } from '@/store/getUser.js'
-import { storeToRefs } from 'pinia'
+import { onMounted, ref } from 'vue'
+import { fetchUser } from '@/services/api'
 
-const { user } = storeToRefs(useUserStore())
-const { getUser } = useUserStore()
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 const backUrl = import.meta.env.VITE_API_BASE_URL
 const props = defineProps({
-  sidebar: { type: String, required: false },
+  type: { type: String, required: false },
   hasBorder: { type: String, required: false }
 })
 onMounted(() => {
@@ -31,7 +32,7 @@ onMounted(() => {
       :class="hasBorder"
     />
 
-    <p class="text-white text-sm lg:text-sm-bold capitalize" v-if="sidebar">
+    <p class="text-white text-sm lg:text-sm-bold capitalize" :class="type ? 'hidden' : ''">
       {{ user.first_name }}
     </p>
   </div>

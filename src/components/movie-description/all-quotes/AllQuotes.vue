@@ -7,6 +7,7 @@ import QuoteInfo from '@/components/movie-description/all-quotes/QuoteInfo.vue'
 import { onMounted, ref, watch } from 'vue'
 import axiosInstance from '@/config/axios/index.js'
 import { useRoute } from 'vue-router'
+import { fetchQuote } from '@/services/api'
 
 const quotes = ref(null)
 const route = useRoute()
@@ -27,7 +28,7 @@ const toggleHiddenDiv = (i) => {
 }
 
 const deleteQuote = async (id, index) => {
-  await axiosInstance.delete(`/api/quote/delete/${id}`)
+  await axiosInstance.delete(`/api/quote/${id}`)
 
   show.value = false
   document.getElementById('index-' + index).style.display = 'none'
@@ -36,15 +37,13 @@ const deleteQuote = async (id, index) => {
 }
 
 const getQuotes = async () => {
-  await axiosInstance.get(`/api/get-quotes/${props.id}`).then((res) => {
-    quotes.value = res.data.data
-  })
+  quotes.value = await fetchQuote(props.id)
 }
 
 watch(
   () => route.params,
   () => {
-    getQuotes()
+    if (route.name == 'movie-description') getQuotes()
   }
 )
 
@@ -61,7 +60,7 @@ onMounted(() => {
     </div>
 
     <div
-      class="bg-black p-8 md:pt-0 mb-10 relative rounded-md"
+      class="bg-modal-black p-8 md:pt-0 mb-10 relative rounded-md"
       v-for="(quote, index) in quotes"
       :key="index"
     >

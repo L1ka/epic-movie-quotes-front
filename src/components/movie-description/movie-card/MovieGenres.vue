@@ -1,4 +1,8 @@
 <script setup>
+import { useLocaleStore } from '@/store/locale.js'
+import { storeToRefs } from 'pinia'
+
+const { selectedLocale } = storeToRefs(useLocaleStore())
 const props = defineProps({ genres: { type: Array, required: true } })
 </script>
 
@@ -9,7 +13,7 @@ const props = defineProps({ genres: { type: Array, required: true } })
       v-for="genre in genres"
       :key="genre.id"
     >
-      {{ genre.genre }}
+      {{ genre.genre[selectedLocale] }}
     </div>
   </div>
 </template>

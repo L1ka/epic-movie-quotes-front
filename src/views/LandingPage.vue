@@ -20,16 +20,17 @@ const modal = computed(() => {
       <div class="h-screen px-2 md:px-12 lg:px-[70px] pt-[30px]">
         <router-view></router-view>
 
-        <nav class="flex justify-between items-center flex-col md:flex-row">
-          <p class="text-light-yallow uppercase text-sm mb-4">Movie quotes</p>
+        <nav class="flex justify-between items-center">
+          <p class="text-light-yallow uppercase text-xs md:text-sm">Movie quotes</p>
 
-          <div class="flex justify-around items-center sm:w-[45%] xl:w-[25%] lg:w-[35%] w-[100%]">
-            <set-locale></set-locale>
+          <div class="flex md:justify-around sm:w-[45%] xl:w-[25%] lg:w-[35%]">
+            <set-locale class="hidden md:flex"></set-locale>
 
             <the-button
               :title="$t('landing.sign_up')"
               color="bg-base-red"
               to="registration"
+              class="mr-2"
             ></the-button>
 
             <the-button :title="$t('landing.log_in')" to="login"></the-button>
@@ -46,7 +47,7 @@ const modal = computed(() => {
             :title="$t('registration.get_started')"
             color="bg-base-red  self-center mt-[24px]"
             to="login"
-            class="px-8"
+            class="px-9"
           ></the-button>
         </div>
       </div>

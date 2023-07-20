@@ -6,15 +6,14 @@ import axiosInstance from '@/config/axios/index.js'
 import { onMounted } from 'vue'
 import { ref, watch, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { fetchMovies } from '@/services/api'
 
 const movies = ref(null)
 const route = useRoute()
 const router = useRouter()
 
 const getMovies = async () => {
-  await axiosInstance.get('/api/get-movies').then((res) => {
-    movies.value = res.data.data
-  })
+  movies.value = await fetchMovies()
 }
 
 const handleSearch = async (search) => {
@@ -34,7 +33,7 @@ watch(
 const modal = computed(() => {
   return router.currentRoute.value.name == 'add-movie' ||
     router.currentRoute.value.name == 'edit-movie'
-    ? ' fixed top-0 left-0  right-0  bottom-0 bg-[#191525]'
+    ? ' fixed top-0 left-0  right-0  bottom-0'
     : ''
 })
 

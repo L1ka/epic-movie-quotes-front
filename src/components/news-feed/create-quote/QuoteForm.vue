@@ -4,14 +4,17 @@ import DropDown from '@/components/news-feed/create-quote/DropDown.vue'
 import UserCard from '@/components/news-feed/UserCard.vue'
 import AddImage from '@/components/quotes/add/AddImage.vue'
 import { Form, Field, ErrorMessage } from 'vee-validate'
-import { ref } from 'vue'
-import { useUserStore } from '@/store/getUser.js'
-import { storeToRefs } from 'pinia'
+import { ref, onMounted } from 'vue'
 import axiosInstance from '@/config/axios/index.js'
 import { onClickOutside } from '@vueuse/core'
 import { useRouter } from 'vue-router'
+import { fetchUser } from '@/services/api'
 
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 
 const router = useRouter()
 
@@ -33,25 +36,23 @@ const closeModal = () => {
 }
 
 const handleSubmit = async (data) => {
-  await axiosInstance.post(
-    'api/quote/store',
-    {
-      ...data,
-      ...{ image: image.value ? image.value : data.image },
-      id: movieId.value,
-      user_id: user.value.id
-    },
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    }
-  )
+  const formData = new FormData()
+  formData.append('image', image.value ? image.value : data.image)
+  formData.append('quote', JSON.stringify(data.quote))
+  formData.append('user_id', user.value.id)
+  formData.append('movie_id', movieId.value)
+  await axiosInstance.post('api/quotes', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  })
 
   closeModal()
 }
 
 onClickOutside(modal, () => closeModal())
+
+onMounted(() => {
+  getUser()
+})
 </script>
 
 <template>

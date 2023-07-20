@@ -1,5 +1,6 @@
 <script setup>
 import IconNavigation from '@/components/icons/IconNavigation.vue'
+import IconSearch from '@/components/icons/IconSearch.vue'
 import IconBell from '@/components/icons/IconBell.vue'
 import NotificationBar from '@/components/news-feed/notification/NotificationBar.vue'
 import SideBar from '@/components/news-feed/SideBar.vue'
@@ -7,32 +8,28 @@ import SetLocale from '@/components/ui/SetLocale.vue'
 import { onMounted, ref } from 'vue'
 import axiosInstance from '@/config/axios/index.js'
 import { onClickOutside } from '@vueuse/core'
-import { storeToRefs } from 'pinia'
-import { useUserStore } from '@/store/getUser.js'
 import instantiatePusher from '@/helpers/instantiatePusher.js'
 import { useRouter } from 'vue-router'
+import { fetchNotifications } from '@/services/api'
 
 const pusherActive = ref(false)
 const router = useRouter()
 const modal = ref(null)
 const open = ref(false)
 const sideBarIsOpen = ref(false)
-const { getUser } = useUserStore()
-const { user } = storeToRefs(useUserStore())
 const notificationsArr = ref([])
 const length = ref(null)
 const props = defineProps({
   userId: { type: Number }
 })
 
-const getNotifications = async () => [
-  await axiosInstance.get(`/api/get-notifications`).then((res) => {
-    notificationsArr.value = res.data.data
-    length.value = res.data.data.filter((el) => {
-      return el.seen === 0
-    }).length
-  })
-]
+const getNotifications = async () => {
+  notificationsArr.value = await fetchNotifications()
+
+  length.value = notificationsArr.value.filter((el) => {
+    return el.seen === 0
+  }).length
+}
 
 const logout = async () => {
   await axiosInstance.post('api/logout').then(() => {
@@ -55,7 +52,6 @@ const updateNotifications = () => {
 }
 
 onMounted(() => {
-  getUser()
   getNotifications()
   pusherActive.value = instantiatePusher()
 
@@ -69,19 +65,23 @@ onMounted(() => {
 </script>
 
 <template>
-  <nav class="backdrop-blur-xl bg-light-gray w-full px-8 py-6 flex justify-between fixed z-30">
+  <nav
+    class="backdrop-blur-xl bg-light-gray w-full px-8 py-6 flex justify-between items-center fixed z-30"
+  >
     <icon-navigation @click="sideBarIsOpen = true" class="lg:hidden"></icon-navigation>
     <p class="text-light-yallow uppercase hidden lg:block">Movie quotes</p>
     <side-bar ref="modal" v-if="sideBarIsOpen" class="lg:hidden"></side-bar>
 
-    <div class="flex lg:w-[25%] xl:w-[20%]">
-      <div class="flex items-center justify-between lg:w-full relative">
+    <div class="flex">
+      <div class="flex gap-6 items-center justify-between lg:w-full relative">
+        <icon-search class="mr-2 w-8 h-6 lg:hidden" @click="$emit('openSearch')"></icon-search>
         <div class="relative" @click="open = !open">
           <p
             class="bg-base-red text-white rounded-full text-sm w-[25px] h-[25px] flex justify-center items-center absolute top-[-20%] right-0"
           >
             <span>{{ length }}</span>
           </p>
+
           <icon-bell class="h-8 w-10"></icon-bell>
           <div
             v-if="open"
@@ -98,6 +98,7 @@ onMounted(() => {
         </button>
       </div>
     </div>
+
     <notification-bar
       v-if="open"
       :notifications="notificationsArr"

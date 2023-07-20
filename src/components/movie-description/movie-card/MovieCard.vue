@@ -4,11 +4,11 @@ import AllQuotes from '@/components/movie-description/all-quotes/AllQuotes.vue'
 import EditOrDeleteMovie from '@/components/movie-description/movie-card/EditOrDeleteMovie.vue'
 import MovieGenres from '@/components/movie-description/movie-card/MovieGenres.vue'
 import QuoteSum from '@/components/movie-description/movie-card/QuoteSum.vue'
-import axiosInstance from '@/config/axios/index.js'
 import { onMounted, ref, watch } from 'vue'
 import { useLocaleStore } from '@/store/locale.js'
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'
+import { fetchMovie } from '@/services/api'
 
 const { selectedLocale } = storeToRefs(useLocaleStore())
 
@@ -18,16 +18,13 @@ const backUrl = import.meta.env.VITE_API_BASE_URL
 const movie = ref(null)
 
 const getMovie = async () => {
-  await axiosInstance.get(`/api/get-movie/${props.id}`).then((res) => {
-    movie.value = { ...res.data.data }
-  })
+  movie.value = await fetchMovie(props.id)
 }
 
 watch(
   () => route.params,
   () => {
-    console.log('yep')
-    getMovie()
+    if (route.name == 'movie-description') getMovie()
   }
 )
 
@@ -44,7 +41,7 @@ onMounted(() => {
         <div class="flex flex-col md:flex-row w-full">
           <div
             :style="{ 'background-image': 'url( ' + backUrl + movie.image + ')' }"
-            class="md:w-[55%] w-full h-52 rounded-md md:mr-8 bg-cover bg-center"
+            class="md:w-[45%] w-full h-72 rounded-md md:mr-8 bg-cover bg-center"
           ></div>
 
           <div class="flex flex-col mt-6 md:mt-0 md:w-[45%]">

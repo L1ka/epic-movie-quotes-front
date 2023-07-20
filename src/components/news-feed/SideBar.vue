@@ -5,13 +5,15 @@ import UserCard from '@/components/ui/UserCard.vue'
 import SetLocale from '@/components/ui/SetLocale.vue'
 import axiosInstance from '@/config/axios/index.js'
 import { useRoute, useRouter } from 'vue-router'
-import { computed } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useUserStore } from '@/store/getUser.js'
+import { computed, onMounted, ref } from 'vue'
+import { fetchUser } from '@/services/api'
 
 const route = useRoute()
 const router = useRouter()
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 
 const logout = async () => {
   await axiosInstance.post('api/logout').then(() => {
@@ -31,17 +33,19 @@ const newsFeedActive = computed(() => {
 const hasBorder = computed(() => {
   return route.path === '/profile' ? 'border-2  border-base-red' : ''
 })
+
+onMounted(() => getUser())
 </script>
 
 <template>
   <div
-    class="px-12 py-6 md:px-7 fixed z-10 top-0 left-0 right-[10%] lg:top-24 lg:right-[80%] lg:bg-transparent text-white bg-black"
+    class="px-12 py-6 md:px-7 fixed z-[11000] md:z-10 top-0 left-0 right-[10%] lg:top-24 lg:right-[80%] lg:bg-transparent text-white bg-modal-black"
   >
     <router-link :to="{ name: 'profile' }" class="flex items-center mb-10 pt-8">
       <user-card class="mb-0 mt-0" :hasBorder="hasBorder" type="sidebar"> </user-card>
 
       <div class="flex flex-col lg:text-xs xl:text-sm">
-        <p class="text-white text-sm lg:text-sm capitalize">{{ user.first_name }}</p>
+        <p class="text-white text-sm lg:text-sm capitalize">{{ user?.first_name }}</p>
         <p class="text-xs text-gray">{{ $t('side_bar.edit_profile') }}</p>
       </div>
     </router-link>
@@ -50,7 +54,7 @@ const hasBorder = computed(() => {
       :to="{ name: 'news-feed' }"
       class="flex items-center mb-12 ml-2 lg:text-xs xl:text-sm"
     >
-      <icon-house class="mr-10 lg:mr-6" :class="newsFeedActive"></icon-house>
+      <icon-house class="mr-10 lg:mr-6 w-9 h-9" :class="newsFeedActive"></icon-house>
       <p>{{ $t('side_bar.news_feed') }}</p>
     </router-link>
 

@@ -6,17 +6,18 @@ import ErrorMessage from '@/components/user-profile/mobile/ErrorMessage.vue'
 import UserImage from '@/components/user-profile/UserImage.vue'
 import { RouterView } from 'vue-router'
 import { Form } from 'vee-validate'
-import { useUserStore } from '@/store/getUser.js'
 import axiosInstance from '@/config/axios/index.js'
-import { storeToRefs } from 'pinia'
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { fetchUser } from '@/services/api'
 
 const router = useRouter()
 const route = useRoute()
 const errorsFromBack = ref(null)
-const { getUser } = useUserStore()
-const { user } = storeToRefs(useUserStore())
+const user = ref(null)
+const getUser = async () => {
+  user.value = await fetchUser()
+}
 
 const form = reactive({
   email: '',
@@ -46,7 +47,7 @@ const showSaveButton = computed(() => {
 
 const updateEmail = async () => {
   await axiosInstance
-    .post('/api/update-email', { email: route.query.email })
+    .post('/api/profile/email', { email: route.query.email })
     .then(() => router.push({ name: 'profile' }))
 }
 
@@ -56,7 +57,7 @@ if (route.query.email) {
 
 const handleSubmit = async (data, { resetForm }) => {
   await axiosInstance
-    .post('/api/update-user', {
+    .post('/api/profile/user', {
       user: user.value,
       email: data.email,
       password: data.password,
@@ -76,6 +77,8 @@ const handleSubmit = async (data, { resetForm }) => {
   resetForm()
   reset()
 }
+
+onMounted(() => getUser())
 </script>
 
 <template>
@@ -84,7 +87,7 @@ const handleSubmit = async (data, { resetForm }) => {
 
     <p class="hidden lg:block text-white">{{ $t('profile.profile') }}</p>
     <div
-      class="bg-light-black relative lg:text-dark-gray lg:bg-black px-8 lg:px-24 2xl:px-40 flex flex-col items-center mt-6 lg:mt-32 w-full lg:w-[55%] h-screen lg:h-full lg:pb-44 mb-48"
+      class="bg-light-black relative lg:text-dark-gray lg:bg-modal-black px-8 lg:px-36 2xl:px-52 flex flex-col items-center mt-6 lg:mt-32 w-full lg:w-[55%] h-screen lg:h-full lg:pb-44 mb-48"
     >
       <user-image></user-image>
 
@@ -94,9 +97,10 @@ const handleSubmit = async (data, { resetForm }) => {
           name="first_name"
           id="input1"
           @show="showInput($event)"
+          :user="user.first_name"
         ></old-value-field>
 
-        <div class="mb-6 input" id="1" v-if="visibleInputs.input1">
+        <div class="mb-6 input w-full" id="1" v-if="visibleInputs.input1">
           <p class="mb-2">{{ $t('profile.new_username') }}</p>
 
           <the-input
@@ -104,7 +108,7 @@ const handleSubmit = async (data, { resetForm }) => {
             name="first_name"
             rules="required|min:3|max:15|alpha_num_lower"
             :errors="errors"
-            class="mb-[0] w-[750px] text-dark-gray"
+            class="mb-[0] w-full text-dark-gray"
             :valid="meta.valid"
             :placeholder="$t('profile.enter_username')"
           ></the-input>
@@ -115,6 +119,7 @@ const handleSubmit = async (data, { resetForm }) => {
           id="input2"
           name="email"
           @show="showInput($event)"
+          :user="user.email"
         ></old-value-field>
 
         <div class="mb-6 input" id="2" v-if="visibleInputs.input2">

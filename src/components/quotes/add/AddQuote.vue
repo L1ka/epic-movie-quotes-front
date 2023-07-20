@@ -35,13 +35,13 @@ onClickOutside(modal, close)
 <template>
   <div
     v-if="show"
-    class="absolute z-50 top-0 left-0 bottom-0 right-0 backdrop-blur-sm bg-black/50"
+    class="rounded-lg flex justify-center absolute top-0 left-0 right-0 bottom-0 text-white backdrop-blur-sm bg-black/30 z-40"
     @drop.prevent="onDrop"
     @dragover.prevent
     @dragleave.prevent
   >
     <div
-      class="rounded-lg z-50 bg-modal-black absolute top-0 left-0 right-0 bottom-0 text-white lg:mr-7 lg:top-[9%] lg:left-[25%] xl:left-[45%] xl:translate-x-[-50%] xl:w-[57%] overflow-y-scroll max-h-[1000px]"
+      class="text-white relative z-50 bg-modal-black w-full lg:mt-24 lg:w-[60%] overflow-y-scroll max-h-[1000px] lg:mb-12"
     >
       <div ref="modal" v-if="show">
         <quote-header @open="close"></quote-header>

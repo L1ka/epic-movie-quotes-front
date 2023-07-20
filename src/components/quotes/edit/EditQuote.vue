@@ -4,7 +4,7 @@ import EditQuoteForm from '@/components/quotes/edit/EditQuoteForm.vue'
 import UserCard from '@/components/ui/UserCard.vue'
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import axiosInstance from '@/config/axios/index.js'
+import { fetchOneQuote } from '@/services/api'
 import { onClickOutside } from '@vueuse/core'
 
 const route = useRoute()
@@ -13,18 +13,16 @@ const modal = ref(null)
 const show = ref(true)
 const quote = ref(null)
 
+const getQuote = async () => {
+  quote.value = await fetchOneQuote(route.params.quoteId)
+}
+
 const close = () => {
   show.value = false
-  router.push({ name: 'movie-description', params: { id: quote.value.movie_id } })
+  router.push({ name: 'movie-description', params: { id: quote.value?.movie_id } })
 }
 
 onClickOutside(modal, close)
-
-const getQuote = async () => {
-  await axiosInstance.get(`/api/get-quote/${route.params.quoteId}`).then((res) => {
-    quote.value = res.data.data
-  })
-}
 
 onMounted(() => {
   getQuote()
@@ -37,7 +35,7 @@ onMounted(() => {
     v-if="show && quote"
   >
     <div
-      class="text-white z-50 bg-black lg:mt-24 lg:w-[60%] overflow-y-scroll max-h-[1000px]"
+      class="text-white z-50 bg-modal-black w-full lg:mt-24 lg:w-[60%] overflow-y-scroll max-h-[1000px]"
       ref="modal"
       v-if="quote && show"
     >
