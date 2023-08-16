@@ -78,7 +78,7 @@ onMounted(() => {
           as="textarea"
           name="quote.en"
           rows="4"
-          rules="required|min:3|max:30|alpha_latin"
+          rules="required|min:3|max:200|alpha_latin"
           placeholder="Start create new quote"
           class="bg-transparent rounded-lg indent-3 pt-4 w-full border-2 border-border pr-16 pl-2 md:placeholder:text-sm-m"
         />
@@ -91,7 +91,7 @@ onMounted(() => {
           as="textarea"
           name="quote.ka"
           rows="4"
-          rules="required|min:3|max:30|alpha_geo"
+          rules="required|min:3|max:200|alpha_geo"
           placeholder="ახალი ციტატა"
           class="bg-transparent rounded-lg indent-3 pt-4 w-full border-2 border-border pr-16 pl-2 md:placeholder:text-sm-m"
         />

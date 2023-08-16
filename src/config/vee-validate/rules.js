@@ -35,7 +35,7 @@ defineRule('alpha_num_lower', (value) => {
 })
 
 defineRule('alpha_geo', (value) => {
-  if (!/^[ა-ჰ\s?,.'":;]+$/.test(value)) {
+  if (!/^[ა-ჰ\d\s?,.'":;]+$/.test(value)) {
     return false
   }
 
@@ -43,7 +43,7 @@ defineRule('alpha_geo', (value) => {
 })
 
 defineRule('alpha_latin', (value) => {
-  if (!/^[a-zA-Z\s?,.'":;]+$/.test(value)) {
+  if (!/^[a-zA-Z\d\s?,.'":;]+$/.test(value)) {
     return false
   }
 

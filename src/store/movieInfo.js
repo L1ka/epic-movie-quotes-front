@@ -12,21 +12,21 @@ export const useInfoStore = defineStore('movieInfo', () => {
       label: 'Director:',
       placeholder: 'Director',
       name: 'director.en',
-      rules: 'required|min:3|max:30|alpha_latin',
+      rules: 'required|min:3|max:100|alpha_latin',
       lang: 'Eng'
     },
     {
       label: 'რეჟისორი:',
       placeholder: 'რეჟისორი',
       name: 'director.ka',
-      rules: 'required|min:3|max:30|alpha_geo',
+      rules: 'required|min:3|max:100|alpha_geo',
       lang: 'ქარ'
     },
     {
       label: 'Description:',
       placeholder: 'Movie description',
       name: 'discription.en',
-      rules: 'required|min:3|max:30|alpha_latin',
+      rules: 'required|min:3|max:200|alpha_latin',
       lang: 'Eng',
       type: 'textarea'
     },
@@ -34,7 +34,7 @@ export const useInfoStore = defineStore('movieInfo', () => {
       label: 'ფილმის აღწერა:',
       placeholder: 'ფილმის აღწერა',
       name: 'discription.ka',
-      rules: 'required|min:3|max:30|alpha_geo',
+      rules: 'required|min:3|max:200|alpha_geo',
       lang: 'ქარ',
       type: 'textarea'
     }

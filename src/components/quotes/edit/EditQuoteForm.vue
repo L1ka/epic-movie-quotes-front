@@ -41,14 +41,14 @@ const handleSubmit = async (data) => {
       name="quote.en"
       language="Eng"
       :value="quote.quote?.en"
-      rules="required|min:3|max:30|alpha_latin"
+      rules="required|min:3|max:200|alpha_latin"
     ></the-input>
 
     <the-input
       name="quote.ka"
       language="ქარ"
       :value="quote.quote?.ka"
-      rules="required|min:3|max:30|alpha_geo"
+      rules="required|min:3|max:200|alpha_geo"
     ></the-input>
 
     <add-image :image="quote.image"> </add-image>

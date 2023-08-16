@@ -163,7 +163,7 @@ const handleSubmit = async (data) => {
         :value="movie.director.en"
         label="Director"
         name="director.en"
-        rules="required|min:3|max:30|alpha_latin"
+        rules="required|min:3|max:100|alpha_latin"
         lang="Eng"
       ></the-input>
 
@@ -171,7 +171,7 @@ const handleSubmit = async (data) => {
         :value="movie.director.ka"
         label="რეჟისორი"
         name="director.ka"
-        rules="required|min:3|max:30|alpha_geo"
+        rules="required|min:3|max:100|alpha_geo"
         lang="ქარ"
       ></the-input>
 
@@ -179,7 +179,7 @@ const handleSubmit = async (data) => {
         :value="movie.discription.en"
         label="Discription"
         name="discription.en"
-        rules="required|min:3|max:30|alpha_latin"
+        rules="required|min:3|max:200|alpha_latin"
         lang="Eng"
       ></the-input>
 
@@ -187,7 +187,7 @@ const handleSubmit = async (data) => {
         :value="movie.discription.ka"
         label="ფილმის აღწერა"
         name="discription.ka"
-        rules="required|min:3|max:30|alpha_geo"
+        rules="required|min:3|max:200|alpha_geo"
         lang="ქარ"
       ></the-input>
 
